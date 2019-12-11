@@ -28,11 +28,11 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     <form action="servlet/LoginServlet" method="post">
       <table>
         <tr><td colspan="2"><center>用户登录</center></td></tr>
-        <tr><td>用户名</td><td><input type="text" name="username" placeholder="请输入用户名"></td></tr>
+        <tr><td>学号或工号</td><td><input type="text" name="userid" placeholder="请输入账号"></td></tr>
         <tr><td>密码</td><td><input type="text" name="password" placeholder="请输入密码"></td></tr>
         <tr><td colspan="2"><center>
-        <input type="radio" name="identity" value="0" onclick="show();">学生&nbsp;&nbsp;
-        <input type="radio" name="identity" value="1" onclick="hidd();">管理员
+		  <input type="radio" name="identity" value="0" onclick="show();">学生&nbsp;&nbsp;
+          <input type="radio" name="identity" value="1" onclick="hidd();">管理员
         </center></td></tr>
         <tr><td colspan="2"><center>
           <button type="submit">登录</button>

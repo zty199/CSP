@@ -1,17 +1,17 @@
 package cn.edu.njust.bean;
 
 public class Student {
+	
 	private String stuID;
 	private String stuName;
 	private String stuPassword;
+	private String stuGrade;
 	private Boolean pubFree;
 	private int usedNum;
 	private int scoreNum;
 	private String stuPersonID;
 	
-	
-	public Student(String stuID, String stuName, String stuPassword, Boolean pubFree, int usedNum, int scoreNum,
-			String stuPersonID) {
+	public Student(String stuID, String stuName, String stuPassword, Boolean pubFree, int usedNum, int scoreNum, String stuPersonID) {
 		super();
 		this.stuID = stuID;
 		this.stuName = stuName;
@@ -22,11 +22,9 @@ public class Student {
 		this.stuPersonID = stuPersonID;
 	}
 
-
 	public String getStuPersonID() {
 		return stuPersonID;
 	}
-
 
 	public void setStuPersonID(String stuPersonID) {
 		this.stuPersonID = stuPersonID;
@@ -36,64 +34,60 @@ public class Student {
 		return stuID;
 	}
 
-
 	public void setStuID(String stuID) {
 		this.stuID = stuID;
 	}
-
 
 	public String getStuName() {
 		return stuName;
 	}
 
-
 	public void setStuName(String stuName) {
 		this.stuName = stuName;
 	}
-
 
 	public String getStuPassword() {
 		return stuPassword;
 	}
 
-
 	public void setStuPassword(String stuPassword) {
 		this.stuPassword = stuPassword;
 	}
 
+	public String getStuGrade() {
+		return stuGrade;
+	}
+
+	public void setStuGrade(String stuGrade) {
+		this.stuGrade = stuGrade;
+	}
 
 	public Boolean getPubFree() {
 		return pubFree;
 	}
 
-
 	public void setPubFree(Boolean pubFree) {
 		this.pubFree = pubFree;
 	}
-
 
 	public int getUsedNum() {
 		return usedNum;
 	}
 
-
 	public void setUsedNum(int usedNum) {
 		this.usedNum = usedNum;
 	}
-
 
 	public int getScoreNum() {
 		return scoreNum;
 	}
 
-
 	public void setScoreNum(int scoreNum) {
 		this.scoreNum = scoreNum;
 	}
 
-
 	public Student() {
-		// TODO ×Ô¶¯Éú³ÉµÄ¹¹Ôìº¯Êý´æ¸ù
+		// TODO ï¿½Ô¶ï¿½ï¿½ï¿½ï¿½ÉµÄ¹ï¿½ï¿½ìº¯ï¿½ï¿½ï¿½ï¿½ï¿½
 	}
 
 }
