@@ -1,10 +1,24 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ page import="cn.edu.njust.bean.Student, cn.edu.njust.dao.StudentDao"%>
+<%@ page language="java" import="java.util.*, javax.swing.*" pageEncoding="UTF-8"%>
+<%@ page import="cn.edu.njust.bean.*, cn.edu.njust.dao.*"%>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 Student student = new Student();
-student = (Student) session.getAttribute("user");
+if(session.getAttribute("identity") == null) {
+	JOptionPane.showMessageDialog(null, "请先登录！");
+%>
+<jsp:forward page="login.jsp"></jsp:forward>
+<%
+}
+int identity = (int) session.getAttribute("identity");
+if(identity == 0) {
+	student = (Student) session.getAttribute("user");
+}
+if(identity == 1) {
+	String stuID = request.getParameter("stuID");
+	StudentDao dao = new StudentDao();
+	student = dao.getInfo(stuID);
+}
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -16,7 +30,7 @@ student = (Student) session.getAttribute("user");
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
+	<meta http-equiv="expires" content="0">
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
@@ -27,6 +41,59 @@ student = (Student) session.getAttribute("user");
   </head>
   
   <body>
-    This is my JSP page. <br>
+    <center>
+    <form action="servlet/StudentModifyServlet?stuID=<%=student.getStuID()%>" method="post">
+      <table>
+        <tr><td colspan="2">修改学生信息</td></tr>
+        <tr>
+          <td>年级</td>
+          <%
+          if(identity == 0) {
+          %>
+          <td><input type="text" name="grade" value="<%=student.getStuGrade()%>" autocomplete="off" onfocus="this.blur()"></td>
+          <%
+          } else {
+          %>
+          <td><input type="text" name="grade" value="<%=student.getStuGrade()%>" autocomplete="off"></td>
+          <%
+          }
+          %>
+        </tr>
+        <tr>
+          <td>学号</td>
+          <%
+          if(identity == 0) {
+          %>
+          <td><input type="text" name="id" value="<%=student.getStuID()%>" autocomplete="off" onfocus="this.blur()"></td>
+          <%
+          } else {
+          %>
+          <td><input type="text" name="id" value="<%=student.getStuID()%>" autocomplete="off"></td>
+          <%
+          }
+          %>
+        </tr>
+        <tr><td>姓名</td><td><input type="text" name="name" value="<%=student.getStuName()%>" autocomplete="off"></td></tr>
+        <tr><td>身份证号</td><td><input type="text" name="pid" value="<%=student.getStuPersonID()%>" placeholder="请输入身份证号" autocomplete="off"></td></tr>
+        <tr><td>登录密码</td><td><input type="password" name="pwd" value="<%=student.getStuPassword()%>" placeholder="请输入新密码" autocomplete="off"></td></tr>
+        <tr><td>确认密码</td><td><input type="password" name="cpwd" value="<%=student.getStuPassword()%>" placeholder="请确认密码" autocomplete="off"></td></tr>
+        <tr><td colspan="2">
+          <button type="submit">修改</button>
+          <button type="button" onclick="window.location.reload();">重置</button>
+          <%
+          if(identity == 0) {
+          %>
+          <button type="button" onclick="window.location='/CSP/jsp/studentMain.jsp';">返回</button>
+          <%
+          } else {
+          %>
+          <button type="button" onclick="">返回</button>
+          <%
+          }
+          %>
+        </td></tr>
+      </table>
+    </form>
+    </center>
   </body>
 </html>

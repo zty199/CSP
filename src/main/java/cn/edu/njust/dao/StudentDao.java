@@ -63,7 +63,7 @@ public class StudentDao {
         return student;
     }
 	
-	/*public boolean isRegistered(String stuID) throws SQLException {
+	public boolean isListed(String stuID) throws SQLException {
 		String sql = "select * from stu_overview where stuID = '" + stuID + "'";
 		Connection conn = DbUtil.getCon();
 		Student student = new Student();
@@ -82,7 +82,7 @@ public class StudentDao {
     		return true;
     	else
     		return false;
-	}*/
+	}
 	
 	public boolean isValid(String stuID, String stuPassword) throws SQLException {
 		String sql = "select * from stu_overview where stuID = '" + stuID + "'";
@@ -129,19 +129,16 @@ public class StudentDao {
     }
 	
 	public boolean modifyStudent(Student student, String temp) throws SQLException {
-    	String sql = "update stu_overview set stuID = ?, password = ?, name = ?, grade = ?, IDnumber = ?, public_free = ?, used_qual = ?, score_qual = ? where stuID = ?";
+    	String sql = "update stu_overview set stuID = ?, password = ?, name = ?, grade = ?, IDnumber = ? where stuID = ?";
     	Connection conn = DbUtil.getCon();
     	try {			
     		PreparedStatement pst = conn.prepareStatement(sql);
-    		pst.setString(1, student.getStuID());
+    		pst.setString(1, temp);
     		pst.setString(2, student.getStuPassword());
     		pst.setString(3, student.getStuName());
     		pst.setString(4, student.getStuGrade());
     		pst.setString(5, student.getStuPersonID());
-    		pst.setBoolean(6, student.getPubFree());
-    		pst.setInt(7, student.getUsedNum());
-    		pst.setInt(8, student.getScoreNum());
-    		pst.setString(9, temp);
+    		pst.setString(6, student.getStuID());
     		int flag = pst.executeUpdate();
     		pst.close();
     		return flag > 0 ? true : false;

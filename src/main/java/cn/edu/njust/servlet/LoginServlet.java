@@ -21,9 +21,11 @@ public class LoginServlet extends HttpServlet {
 		this.doPost(request, response);
 	}
 
+	@SuppressWarnings("null")
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
+        //String preUrl = (String) request.getSession().getAttribute("preUrl");
         int identity = Integer.parseInt(request.getParameter("identity"));
         if(identity == 0) {
         	Student student = new Student();
@@ -34,7 +36,12 @@ public class LoginServlet extends HttpServlet {
     			if (dao.isValid(student.getStuID(), student.getStuPassword())) {
     				student = dao.getInfo(student.getStuID());
     				request.getSession().setAttribute("user", student);
-    				response.sendRedirect("../jsp/studentMain.jsp");
+    				request.getSession().setAttribute("identity", identity);
+    				//if(preUrl != null && !preUrl.endsWith("login.jsp") && !preUrl.endsWith("index.jsp")) {
+    				//	response.sendRedirect(preUrl);
+    				//} else {
+    					response.sendRedirect("../jsp/studentMain.jsp");
+    				//}
     			    return;
     			} else {
     				request.getSession().setAttribute("user", null);
@@ -54,7 +61,12 @@ public class LoginServlet extends HttpServlet {
     			if (dao.isValid(admin.getAdminID(), admin.getAdminPassword())) {
     				admin = dao.getInfo(admin.getAdminID());
     				request.getSession().setAttribute("user", admin);
-    				response.sendRedirect("../jsp/managerMain.jsp");
+    				request.getSession().setAttribute("identity", identity);
+    				//if(preUrl != null || !preUrl.endsWith("login.jsp") && !preUrl.endsWith("index.jsp")) {
+    				//	response.sendRedirect(preUrl);
+    				//} else {
+    					response.sendRedirect("../jsp/managerMain.jsp");
+    				//}
     			    return;
     			} else {
     				request.getSession().setAttribute("user", null);

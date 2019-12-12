@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ page import="cn.edu.njust.bean.Student, cn.edu.njust.dao.StudentDao"%>
+<%@ page import="cn.edu.njust.bean.*, cn.edu.njust.dao.*"%>
+<jsp:include page="isStudent.jsp"></jsp:include>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -39,7 +40,7 @@ student = (Student) session.getAttribute("user");
         团报资格&nbsp;&nbsp;公共：<%=student.getPubFree()%>&nbsp;&nbsp;分数：<%=student.getScoreNum()%>
         </td></tr>
         <tr><td colspan="7">
-          <button type="button" onclick="">进行团报</button>
+          <button type="button" onclick="window.location.href='/CSP/jsp/studentApply.jsp';">进行团报</button>
         </td></tr>
       </table>
     </center>
