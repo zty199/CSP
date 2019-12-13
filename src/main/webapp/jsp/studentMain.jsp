@@ -36,6 +36,24 @@ student = (Student) session.getAttribute("user");
           <button type="button" onclick="window.location.href='/CSP/jsp/studentModify.jsp';">修改信息</button>
         </td></tr>
         <tr><td>CSP</td><td>总分</td><td>1</td><td>2</td><td>3</td><td>4</td><td>5</td></tr>
+        <%
+        ScoreDao dao = new ScoreDao();
+        List<Score> list = dao.getAllScore(student.getStuID());
+        for(int i = 0; i < list.size(); i++) {
+        	Score score = list.get(i);
+        %>
+        <tr>
+          <td><%=score.getSession()%></td>
+          <td><%=score.getTotal_score()%></td>
+          <td><%=score.getScore_1()%></td>
+          <td><%=score.getScore_2()%></td>
+          <td><%=score.getScore_3()%></td>
+          <td><%=score.getScore_4()%></td>
+          <td><%=score.getScore_5()%></td>
+        </tr>
+        <%
+        }
+        %>
         <tr><td colspan="7">
         团报资格&nbsp;&nbsp;公共：<%=student.getPubFree()%>&nbsp;&nbsp;分数：<%=student.getScoreNum()%>
         </td></tr>

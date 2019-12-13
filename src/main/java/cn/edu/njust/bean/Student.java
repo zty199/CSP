@@ -10,17 +10,6 @@ public class Student {
 	private int usedNum;
 	private int scoreNum;
 	private String stuPersonID;
-	
-	public Student(String stuID, String stuName, String stuPassword, Boolean pubFree, int usedNum, int scoreNum, String stuPersonID) {
-		super();
-		this.stuID = stuID;
-		this.stuName = stuName;
-		this.stuPassword = stuPassword;
-		this.pubFree = pubFree;
-		this.usedNum = usedNum;
-		this.scoreNum = scoreNum;
-		this.stuPersonID = stuPersonID;
-	}
 
 	public String getStuPersonID() {
 		return stuPersonID;
@@ -84,10 +73,6 @@ public class Student {
 
 	public void setScoreNum(int scoreNum) {
 		this.scoreNum = scoreNum;
-	}
-
-	public Student() {
-		// TODO �Զ����ɵĹ��캯�����
 	}
 
 }

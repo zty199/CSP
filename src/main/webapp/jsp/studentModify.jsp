@@ -50,11 +50,11 @@ if(identity == 1) {
           <%
           if(identity == 0) {
           %>
-          <td><input type="text" name="grade" value="<%=student.getStuGrade()%>" autocomplete="off" onfocus="this.blur()"></td>
+          <td><input type="text" name="grade" value="<%=student.getStuGrade()%>" onfocus="this.blur()"></td>
           <%
           } else {
           %>
-          <td><input type="text" name="grade" value="<%=student.getStuGrade()%>" autocomplete="off"></td>
+          <td><input type="text" name="grade" value="<%=student.getStuGrade()%>"></td>
           <%
           }
           %>
@@ -64,19 +64,19 @@ if(identity == 1) {
           <%
           if(identity == 0) {
           %>
-          <td><input type="text" name="id" value="<%=student.getStuID()%>" autocomplete="off" onfocus="this.blur()"></td>
+          <td><input type="text" name="id" value="<%=student.getStuID()%>" onfocus="this.blur()"></td>
           <%
           } else {
           %>
-          <td><input type="text" name="id" value="<%=student.getStuID()%>" autocomplete="off"></td>
+          <td><input type="text" name="id" value="<%=student.getStuID()%>"></td>
           <%
           }
           %>
         </tr>
-        <tr><td>姓名</td><td><input type="text" name="name" value="<%=student.getStuName()%>" autocomplete="off"></td></tr>
-        <tr><td>身份证号</td><td><input type="text" name="pid" value="<%=student.getStuPersonID()%>" placeholder="请输入身份证号" autocomplete="off"></td></tr>
-        <tr><td>登录密码</td><td><input type="password" name="pwd" value="<%=student.getStuPassword()%>" placeholder="请输入新密码" autocomplete="off"></td></tr>
-        <tr><td>确认密码</td><td><input type="password" name="cpwd" value="<%=student.getStuPassword()%>" placeholder="请确认密码" autocomplete="off"></td></tr>
+        <tr><td>姓名</td><td><input type="text" name="name" value="<%=student.getStuName()%>"></td></tr>
+        <tr><td>身份证号</td><td><input type="text" name="pid" value="<%=student.getStuPersonID()%>" placeholder="请输入身份证号"></td></tr>
+        <tr><td>登录密码</td><td><input type="password" name="pwd" value="<%=student.getStuPassword()%>" placeholder="请输入新密码"></td></tr>
+        <tr><td>确认密码</td><td><input type="password" name="cpwd" value="<%=student.getStuPassword()%>" placeholder="请确认密码"></td></tr>
         <tr><td colspan="2">
           <button type="submit">修改</button>
           <button type="button" onclick="window.location.reload();">重置</button>

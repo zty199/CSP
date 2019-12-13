@@ -5,13 +5,6 @@ public class Admin {
 	private String adminID;
 	private String adminPassword;
 	private String adminGrade;
-	
-	public Admin(String adminID, String adminPassword, String adminGrade) {
-		super();
-		this.adminID = adminID;
-		this.adminPassword = adminPassword;
-		this.adminGrade = adminGrade;
-	}
 
 	public String getAdminID() {
 		return adminID;
@@ -35,10 +28,6 @@ public class Admin {
 
 	public void setAdminGrade(String adminGrade) {
 		this.adminGrade = adminGrade;
-	}
-
-	public Admin() {
-		// TODO �Զ����ɵĹ��캯�����
 	}
 
 }

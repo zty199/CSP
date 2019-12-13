@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.edu.njust.bean.Student;
+import cn.edu.njust.bean.*;
 import cn.edu.njust.dao.DbUtil;
 
 public class StudentDao {
@@ -148,7 +148,7 @@ public class StudentDao {
     	}
     }
 	
-	public boolean delUser(String stuID) throws SQLException {
+	public boolean delStudent(String stuID) throws SQLException {
     	String sql = "delete from stu_overview where stuID = '" + stuID + "'";
     	Connection conn = DbUtil.getCon();
     	try {
@@ -161,5 +161,5 @@ public class StudentDao {
     		return false;
     	}
     }
-	
+
 }

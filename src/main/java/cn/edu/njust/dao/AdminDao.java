@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
-import cn.edu.njust.bean.Admin;
+import cn.edu.njust.bean.*;
 import cn.edu.njust.dao.DbUtil;
 
 public class AdminDao {
@@ -113,7 +113,7 @@ public class AdminDao {
     	}
     }
 	
-	public boolean modifyAdmin(Admin admin, String temp) throws SQLException {
+	/*public boolean modifyAdmin(Admin admin, String temp) throws SQLException {
     	String sql = "update manager set jobID = ?, password = ?, grade = ? where jobID = ?";
     	Connection conn = DbUtil.getCon();
     	try {			
@@ -131,7 +131,7 @@ public class AdminDao {
     	}
     }
 	
-	public boolean delUser(String adminID) throws SQLException {
+	public boolean delAdmin(String adminID) throws SQLException {
     	String sql = "delete from manager where jobID = '" + adminID + "'";
     	Connection conn = DbUtil.getCon();
     	try {
@@ -143,6 +143,25 @@ public class AdminDao {
     		e.printStackTrace();
     		return false;
     	}
-    }
+    }*/
 	
+	public List<Student> getGradeStudent(String grade) throws SQLException {
+		List<Student> list = new ArrayList<Student>();
+    	String sql = "select stuID from stu_overview where grade = '" + grade + "'";
+    	Connection conn = DbUtil.getCon();   
+        try {
+             PreparedStatement pst = conn.prepareStatement(sql);
+             ResultSet rs = pst.executeQuery();
+             while(rs.next())
+             {
+             	Student stu = new Student();
+             	stu.setStuID(rs.getString("stuID"));
+                list.add(stu);
+             }
+         } catch (SQLException e) {
+             e.printStackTrace();
+         }
+         return list;
+    }
+
 }

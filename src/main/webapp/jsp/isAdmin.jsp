@@ -10,8 +10,8 @@ if(session.getAttribute("identity") == null) {
 <%
 }
 int identity = (int) session.getAttribute("identity");
-if(identity != 0) {
-	JOptionPane.showMessageDialog(null, "请以学生身份登录！");
+if(identity != 1) {
+	JOptionPane.showMessageDialog(null, "请以管理员身份登录！");
 %>
 <jsp:forward page="login.jsp"></jsp:forward>
 <%
