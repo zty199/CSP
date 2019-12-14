@@ -10,13 +10,18 @@
     <servlet-class>cn.edu.njust.servlet.StudentModifyServlet</servlet-class>
   </servlet>
   <servlet>
-    <servlet-name>ScoreDeleteServlet</servlet-name>
-    <servlet-class>cn.edu.njust.servlet.ScoreDeleteServlet</servlet-class>
+    <servlet-name>StudentDeleteServlet</servlet-name>
+    <servlet-class>cn.edu.njust.servlet.StudentDeleteServlet</servlet-class>
   </servlet>
   <servlet>
     <servlet-name>ScoreModifyServlet</servlet-name>
     <servlet-class>cn.edu.njust.servlet.ScoreModifyServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ScoreDeleteServlet</servlet-name>
+    <servlet-class>cn.edu.njust.servlet.ScoreDeleteServlet</servlet-class>
+  </servlet>
+
 
 
 
@@ -30,12 +35,16 @@
     <url-pattern>/servlet/StudentModifyServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
-    <servlet-name>ScoreDeleteServlet</servlet-name>
-    <url-pattern>/servlet/ScoreDeleteServlet</url-pattern>
+    <servlet-name>StudentDeleteServlet</servlet-name>
+    <url-pattern>/servlet/StudentDeleteServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>ScoreModifyServlet</servlet-name>
     <url-pattern>/servlet/ScoreModifyServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ScoreDeleteServlet</servlet-name>
+    <url-pattern>/servlet/ScoreDeleteServlet</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

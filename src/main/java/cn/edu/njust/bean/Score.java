@@ -4,13 +4,15 @@ public class Score {
 	
 	private String stuID;
 	private String stuName;
-	private int session;
+	private String session;
 	private int total_score;
 	private int score_1;
 	private int score_2;
 	private int score_3;
 	private int score_4;
 	private int score_5;
+	private String cur_rank;
+	private String all_rank;
 
 	public String getStuID() {
 		return stuID;
@@ -28,11 +30,11 @@ public class Score {
 		this.stuName = stuName;
 	}
 
-	public int getSession() {
+	public String getSession() {
 		return session;
 	}
 
-	public void setSession(int session) {
+	public void setSession(String session) {
 		this.session = session;
 	}
 
@@ -82,6 +84,22 @@ public class Score {
 
 	public void setScore_5(int score_5) {
 		this.score_5 = score_5;
+	}
+
+	public String getCur_rank() {
+		return cur_rank;
+	}
+
+	public void setCur_rank(String cur_rank) {
+		this.cur_rank = cur_rank;
+	}
+
+	public String getAll_rank() {
+		return all_rank;
+	}
+
+	public void setAll_rank(String all_rank) {
+		this.all_rank = all_rank;
 	}
 
 }

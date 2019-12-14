@@ -165,7 +165,13 @@ admin = (Admin) session.getAttribute("user");
 			}
 		}
 		%>
-		<tr><td><input type="submit" value="delete selected" onclick="a()"></td></tr>  
+		<tr><td><input type="submit" value="delete selected" onclick="a()"></td></tr>
+		<tr><td>
+		  <button type="button" onclick="window.location.href='/CSP/jsp/importStudent.jsp';">导入学生</button>
+		  <button type="button" onclick="window.location.href='/CSP/jsp/importScore.jsp';">导入成绩</button>
+		  <button type="button" onclick="window.location.href='/CSP/jsp/managerModify.jsp';">学生列表</button>
+		  <button type="button" onclick="window.location.href='/CSP/jsp/managerOpen.jsp';">团报开启</button>
+		</td></tr>
 	  </table>
 	</form>
   </center>

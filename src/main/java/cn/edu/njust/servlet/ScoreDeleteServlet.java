@@ -35,7 +35,7 @@ public class ScoreDeleteServlet extends HttpServlet {
         	String stuid[] = request.getParameterValues("stuid");
         	for(int i = 0; i < stuid.length; i++) {
         		try {
-        			if(dao.deleteScore(stuid[i])) {
+        			if(dao.delScore(stuid[i])) {
         				JOptionPane.showMessageDialog(null, "删除成功！");
         			    response.sendRedirect("../jsp/managerMain.jsp");
         			    return;

@@ -63,6 +63,24 @@ public class StudentDao {
         return student;
     }
 	
+	public String getStuID(String IDnumber) throws SQLException {
+		String sql = "select * from stu_overview where IDNumber = '" + IDnumber + "'";
+        Connection conn = DbUtil.getCon();
+        String stuID = "NO";
+        try {
+        	PreparedStatement pst = conn.prepareStatement(sql);
+        	ResultSet rs = pst.executeQuery();
+        	while(rs.next()) {
+        		stuID = rs.getString("StuID");
+        	}
+        	rs.close();
+        	pst.close();
+        } catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+        return stuID;
+	}
+	
 	public boolean isListed(String stuID) throws SQLException {
 		String sql = "select * from stu_overview where stuID = '" + stuID + "'";
 		Connection conn = DbUtil.getCon();
