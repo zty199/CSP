@@ -13,7 +13,7 @@ public class ScoreDao {
 	
 	public List<Score> getAllScore(String stuID) throws SQLException {
 		List<Score> list = new ArrayList<Score>();
-    	String sql = "select stu_overview.stuID, stu_overview.name, session, total_score, score_1, score_2, score_3, score_4, score_5 from stu_overview join score_overview on stu_overview.stuID = score_overview.stuID where stu_overview.stuID = '" + stuID + "'";
+    	String sql = "select stu_overview.stuID, stu_overview.name, session, total_score, score_1, score_2, score_3, score_4, score_5, current_rank, period_rank from stu_overview join score_overview on stu_overview.stuID = score_overview.stuID where stu_overview.stuID = '" + stuID + "'";
     	Connection conn = DbUtil.getCon();   
         try {
              PreparedStatement pst = conn.prepareStatement(sql);
@@ -29,6 +29,8 @@ public class ScoreDao {
              	score.setScore_3(rs.getInt("score_3"));
              	score.setScore_4(rs.getInt("score_4"));
              	score.setScore_5(rs.getInt("score_5"));
+             	score.setCur_rank(rs.getString("current_rank"));
+             	score.setAll_rank(rs.getString("period_rank"));
                 list.add(score);
              }
          } catch (SQLException e) {
@@ -39,7 +41,7 @@ public class ScoreDao {
 	
 	public List<Score> getAllScore(String stuID, String session) throws SQLException {
 		List<Score> list = new ArrayList<Score>();
-    	String sql = "select stu_overview.stuID, stu_overview.name, session, total_score, score_1, score_2, score_3, score_4, score_5 from stu_overview join score_overview on stu_overview.stuID = score_overview.stuID where stu_overview.stuID = '" + stuID + "' and session= '" + session + "'";
+    	String sql = "select stu_overview.stuID, stu_overview.name, session, total_score, score_1, score_2, score_3, score_4, score_5, current_rank, period_rank from stu_overview join score_overview on stu_overview.stuID = score_overview.stuID where stu_overview.stuID = '" + stuID + "' and session= '" + session + "'";
     	Connection conn = DbUtil.getCon();   
         try {
              PreparedStatement pst = conn.prepareStatement(sql);
@@ -55,6 +57,8 @@ public class ScoreDao {
              	score.setScore_3(rs.getInt("score_3"));
              	score.setScore_4(rs.getInt("score_4"));
              	score.setScore_5(rs.getInt("score_5"));
+             	score.setCur_rank(rs.getString("current_rank"));
+             	score.setAll_rank(rs.getString("period_rank"));
                 list.add(score);
              }
          } catch (SQLException e) {

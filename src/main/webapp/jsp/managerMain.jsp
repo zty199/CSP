@@ -34,53 +34,53 @@ admin = (Admin) session.getAttribute("user");
 	}
 	</script>
 	<script>
-	 $(function () {
-	        $("#checkall").click(function () {//判断全选框的改变
-	            var flage = $(this).is(":checked");//全选选中为true，否则为false
-	            $("input[name=grade]").each(function () {
-	                $(this).prop("checked", flage);
-	            })
-	        });
-	        //当子元素都选全选选中，其中一个不选取消全选
-	        $("input[name=grade]").click(function () {
-	            var flage1 = true;
-	            for (var i = 0; i < $("input[name=grade]").length; i++) {
-	                if (!$($("input[name=grade]")[i]).is(":checked")) {
-	                    flage1 = false;
-	                    break;
-	                }
-	            }
-	            $("#checkall").prop("checked", flage1);
+	$(function () {
+		$("#checkall").click(function () {//判断全选框的改变
+	    	var flage = $(this).is(":checked");//全选选中为true，否则为false
+	        $("input[name=grade]").each(function () {
+	            $(this).prop("checked", flage);
 	        })
+	    });
+	    //当子元素都选全选选中，其中一个不选取消全选
+	    $("input[name=grade]").click(function () {
+	        var flage1 = true;
+	        for (var i = 0; i < $("input[name=grade]").length; i++) {
+	            if (!$($("input[name=grade]")[i]).is(":checked")) {
+	                flage1 = false;
+	                break;
+	            }
+	        }
+	        $("#checkall").prop("checked", flage1);
 	    })
+	})
 	
-	 $(function () {
-	        $("#stuID").click(function () {//判断全选框的改变
-	            var flage = $(this).is(":checked");//全选选中为true，否则为false
-	            $("input[name=stuid]").each(function () {
-	                $(this).prop("checked", flage);
-	            })
-	        });
-	        //当子元素都选全选选中，其中一个不选取消全选
-	        $("input[name=stuid]").click(function () {
-	            var flage1 = true;
-	            for (var i = 0; i < $("input[name=stuid]").length; i++) {
-	                if (!$($("input[name=stuid]")[i]).is(":checked")) {
-	                    flage1 = false;
-	                    break;
-	                }
-	            }
-	            $("#stuID").prop("checked", flage1);
+	$(function () {
+	    $("#stuID").click(function () {//判断全选框的改变
+	        var flage = $(this).is(":checked");//全选选中为true，否则为false
+	        $("input[name=stuid]").each(function () {
+	            $(this).prop("checked", flage);
 	        })
+	    });
+	    //当子元素都选全选选中，其中一个不选取消全选
+	    $("input[name=stuid]").click(function () {
+	        var flage1 = true;
+	        for (var i = 0; i < $("input[name=stuid]").length; i++) {
+	             if (!$($("input[name=stuid]")[i]).is(":checked")) {
+	                 flage1 = false;
+	                 break;
+	             }
+	        }
+	        $("#stuID").prop("checked", flage1);
 	    })
-	 <%/*$(document).ready(function(){
-            $("[name='allgrade']").click(function(){
-		        if($(this).is(':checked')){
-		            $("[name='grade']").prop('checked',true);
-		        }else{
-		    	    $("[name='grade']").prop('checked',false);
-		        }	
-		    })
+	})
+	<%/*$(document).ready(function(){
+        $("[name='allgrade']").click(function(){
+		    if($(this).is(':checked')){
+		        $("[name='grade']").prop('checked',true);
+		    }else{
+		    	$("[name='grade']").prop('checked',false);
+		    }	
+		})
 	});*/%>
 	</script>
   </head>
@@ -111,21 +111,17 @@ admin = (Admin) session.getAttribute("user");
 		  			<td></td>
 	  			</tr>
 	  			<%
-	  				AdminDao dao=new AdminDao();
-	  				List<Student> list=dao.getGradeStudent(grade);
-	  				for(int i=0; i<list.size(); i++) {
-	  					Student stu = new Student();
-	  					stu = list.get(i);
+	  			AdminDao dao=new AdminDao();
+	  			List<Student> list=dao.getGradeStudent(grade);
+	  			for(int i=0; i<list.size(); i++) {
+	  				Student stu = new Student();
+	  				stu = list.get(i);
 	  			%>
 	  			<tr>
-	  			<%String str = stu.getStuID(); 
-	  			String name = stu.getStuName();
-	  			String grad = stu.getStuGrade();
-	  			%>
-	  				<td><a href="jsp/stuAllScore.jsp?stuID=<%=str %>" ><%=str %></a></td>
-	  				<td><%=stu.getStuName() %></td>
-	  				<td><%=stu.getStuGrade() %></td>
-	  				<td><a href="jsp/studentModify.jsp?stuID=<%=str %>">修改学生信息</a></td>
+	  			  <td><a href="/CSP/jsp/stuAllScore.jsp?stuID=<%=stu.getStuID()%>"><%=stu.getStuID()%></a></td>
+	  			  <td><%=stu.getStuName() %></td>
+	  			  <td><%=stu.getStuGrade() %></td>
+	  			  <td><a href="/CSP/jsp/studentModify.jsp?stuID=<%=stu.getStuID()%>">修改学生信息</a></td>
 	  			</tr>
 	  			<%} %>
 	  		</table>

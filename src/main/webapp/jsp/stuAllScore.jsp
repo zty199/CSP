@@ -29,11 +29,11 @@ admin = (Admin) session.getAttribute("user");
   <body>
 	  <center>
 	  	<%
-	  	ScoreDao dao=new ScoreDao();
+	  	ScoreDao dao = new ScoreDao();
 	  	String stuID = request.getParameter("stuID"); 
 	  	List<Score> list = dao.getAllScore(stuID);
 	  	%>
-	  	<form action="jsp/studentDisplay.jsp"method="post">
+	  	<form action="jsp/stuAllScore.jsp"method="post">
 	  		<table>
 	  			<tr>
 		  			<td>学号</td>
@@ -49,24 +49,25 @@ admin = (Admin) session.getAttribute("user");
 		  			<td>总排名</td>
 	  			</tr>
 	  			<%
-	  				for(int i=0; i<list.size(); i++) {
-	  					Score sc = list.get(i);	
-	  				
+	  			for(int i = 0; i < list.size(); i++) {
+	  				Score score = list.get(i);	
 	  			%>
 	  			<tr>
-	  				<td><%=sc.getStuID() %></a></td>
-	  				<td><%=sc.getStuName() %></td>
-	  				<td><%=sc.getSession() %></td>
-	  				<td><%=sc.getTotal_score() %></a></td>
-	  				<td><%=sc.getScore_1() %></td>
-	  				<td><%=sc.getScore_2() %></td>
-	  				<td><%=sc.getScore_3() %></a></td>
-	  				<td><%=sc.getScore_4() %></td>
-	  				<td><%=sc.getScore_5() %></td>
-	  				<td><%=sc.getCur_rank() %></td>
-	  				<td><%=sc.getAll_rank() %></td>
+	  				<td><%=score.getStuID() %></td>
+	  				<td><%=score.getStuName() %></td>
+	  				<td><%=score.getSession() %></td>
+	  				<td><%=score.getTotal_score() %></td>
+	  				<td><%=score.getScore_1() %></td>
+	  				<td><%=score.getScore_2() %></td>
+	  				<td><%=score.getScore_3() %></td>
+	  				<td><%=score.getScore_4() %></td>
+	  				<td><%=score.getScore_5() %></td>
+	  				<td><%=score.getCur_rank() %></td>
+	  				<td><%=score.getAll_rank() %></td>
 	  			</tr>
-	  			<%} %>
+	  			<%
+	  			}
+	  			%>
 	  		</table>
 	  	</form>
 	  </center>
