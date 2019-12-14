@@ -147,21 +147,43 @@ public class AdminDao {
 	
 	public List<Student> getGradeStudent(String grade) throws SQLException {
 		List<Student> list = new ArrayList<Student>();
-    	String sql = "select stuID from stu_overview where grade = '" + grade + "'";
-    	Connection conn = DbUtil.getCon();   
-        try {
-             PreparedStatement pst = conn.prepareStatement(sql);
-             ResultSet rs = pst.executeQuery();
-             while(rs.next())
-             {
-             	Student stu = new Student();
-             	stu.setStuID(rs.getString("stuID"));
-                list.add(stu);
-             }
-         } catch (SQLException e) {
-             e.printStackTrace();
-         }
-         return list;
-    }
+		if(grade.equals("0000")) {
+			String sql = "select stuID, name, grade from stu_overview";
+	    	Connection conn = DbUtil.getCon();   
+	        try {
+	             PreparedStatement pst = conn.prepareStatement(sql);
+	             ResultSet rs = pst.executeQuery();
+	             while(rs.next())
+	             {
+	             	Student student = new Student();
+	             	student.setStuID(rs.getString("stuID"));
+	             	student.setStuName(rs.getString("name"));
+	             	student.setStuGrade(rs.getString("grade"));
+	                list.add(student);
+	             }
+	         } catch (SQLException e) {
+	             e.printStackTrace();
+	         }
+	         return list;
+		} else {
+			String sql = "select stuID, name, grade from stu_overview where grade = '" + grade + "'";
+	    	Connection conn = DbUtil.getCon();   
+	        try {
+	             PreparedStatement pst = conn.prepareStatement(sql);
+	             ResultSet rs = pst.executeQuery();
+	             while(rs.next())
+	             {
+	             	Student student = new Student();
+	             	student.setStuID(rs.getString("stuID"));
+	             	student.setStuName(rs.getString("name"));
+	             	student.setStuGrade(grade);
+	                list.add(student);
+	             }
+	         } catch (SQLException e) {
+	             e.printStackTrace();
+	         }
+	         return list;
+		}
+	}
 
 }

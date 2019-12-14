@@ -21,6 +21,16 @@
     <servlet-name>ScoreDeleteServlet</servlet-name>
     <servlet-class>cn.edu.njust.servlet.ScoreDeleteServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ExcelOneServlet</servlet-name>
+    <servlet-class>cn.edu.njust.servlet.ExcelOneServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>ExcelTwoServlet</servlet-name>
+    <servlet-class>cn.edu.njust.servlet.ExcelTwoServlet</servlet-class>
+  </servlet>
+
+
 
 
 
@@ -45,6 +55,14 @@
   <servlet-mapping>
     <servlet-name>ScoreDeleteServlet</servlet-name>
     <url-pattern>/servlet/ScoreDeleteServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ExcelOneServlet</servlet-name>
+    <url-pattern>/servlet/ExcelOneServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ExcelTwoServlet</servlet-name>
+    <url-pattern>/servlet/ExcelTwoServlet</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

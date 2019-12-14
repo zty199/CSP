@@ -13,7 +13,7 @@ admin = (Admin) session.getAttribute("user");
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'managerMain.jsp' starting page</title>
+    <title>My JSP 'scoreDisplay.jsp' starting page</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -29,8 +29,8 @@ admin = (Admin) session.getAttribute("user");
 	<script type="text/javascript">
 	function a()
 	{
-		managermain.action="servlet/ScoreDeleteServlet";
-		managermain.submit();
+		scoredisplay.action="servlet/ScoreDeleteServlet";
+		scoredisplay.submit();
 	}
 	</script>
 	<script>
@@ -86,58 +86,93 @@ admin = (Admin) session.getAttribute("user");
   </head>
   
   <body>
-  	<h4>欢迎，<%=admin.getAdminGrade() %>年级管理员
-  	<center><button type="button" onclick="window.location.href='/CSP/jsp/logout.jsp';">注销</button>&nbsp;&nbsp;</center>
-  	</h4>
-	  <center>
-	  	<form action="jsp/scoreDisplay.jsp" method="post">
-	  		CSP届数
-			<select name="session">
-			  <option value="17">CSP-17</option>
-			  <option value="18">CSP-18</option>
-			  <option value="19">CSP-19</option>
-			  <option value="20">CSP-20</option>
-			  <option value="21">CSP-21</option>
+  	<center>
+ 	<form name="scoredisplay" action="jsp/scoreDisplay.jsp" method="post">
+  	  <input type="submit" value="refresh">
+	  <table border="1">
+	  <%
+	  String csp = request.getParameter("session");
+	  String grade = admin.getAdminGrade();
+	  %>
+ 		<!--  <tr>
+		  <td>all<input type="checkbox" name="allgrade" value="0000"id="checkall"></td>
+		  <td>2016<input type="checkbox" name="grade" value="2016"></td>
+		  <td>2017<input type="checkbox" name="grade" value="2017"></td>
+		  <td>2018<input type="checkbox" name="grade" value="2018"></td>
+		  <td>2019<input type="checkbox" name="grade" value="2019"></td>
+		  <td>CSP届数
+			<select name="cspnumber">
+			  <option value="CSP-17">CSP-17</option>
+			  <option value="CSP-18">CSP-18</option>
+			  <option value="CSP-19">CSP-19</option>
+			  <option value="CSP-20">CSP-20</option>
+			  <option value="CSP-21">CSP-21</option>
             </select>
-            <input type="submit" value="查询成绩">
-	  	</form>
-	  	<%String grade = admin.getAdminGrade(); %>
-	  	<form action="jsp/studentDisplay.jsp"method="post">
-	  		<table  border="1">
-	  			<tr>
-		  			<td>学号</td>
-		  			<td>姓名</td>
-		  			<td>年级</td>
-		  			<td></td>
-	  			</tr>
-	  			<%
-	  				AdminDao dao=new AdminDao();
-	  				List<Student> list=dao.getGradeStudent(grade);
-	  				for(int i=0; i<list.size(); i++) {
-	  					Student stu = new Student();
-	  					stu = list.get(i);
-	  			%>
-	  			<tr>
-	  			<%String str = stu.getStuID(); 
-	  			String name = stu.getStuName();
-	  			String grad = stu.getStuGrade();
-	  			%>
-	  				<td><a href="jsp/stuAllScore.jsp?stuID=<%=str %>" ><%=str %></a></td>
-	  				<td><%=stu.getStuName() %></td>
-	  				<td><%=stu.getStuGrade() %></td>
-	  				<td><a href="jsp/studentModify.jsp?stuID=<%=str %>">修改学生信息</a></td>
-	  			</tr>
-	  			<%} %>
-	  		</table>
-	  	</form>
-	  </center>
-  	
-  <ul>
-  	<li><a href="/CSP/jsp/importScore.jsp">导入成绩</a></li>
-  	<li><a href="/CSP/jsp/importStudent.jsp">导入学生</a></li>
-  	<li><a href="/CSP/jsp/managerOpen.jsp">开启团报</a></li>
-  	<li><a href="/CSP/jsp/managerIntention.jsp">团报意向管理</a></li>
-  	<li><a href="/CSP/jsp/managerConfirm.jsp">团报名单管理</a></li>
-  </ul>
+		  </td>
+		</tr>-->
+		<tr>
+		  <td><input type="checkbox" id="stuID">学号</td>
+		  <td>姓名</td>
+		  <td>CSP</td>
+		  <td>总成绩</td>
+		  <td>第一题得分</td>
+		  <td>第二题得分</td>
+		  <td>第三题得分</td>
+		  <td>第四题得分</td>
+		  <td>第五题得分</td>
+		  <td></td>
+		</tr>
+ 		<%
+		/* String[] grade = new String[4];
+		if(request.getParameterValues("grade") == null) {
+			grade[0] = "2016";
+			grade[1] = "2017";
+			grade[2] = "2018";
+			grade[3] = "2019";
+		} else {
+			grade = request.getParameterValues("grade");
+		}
+		*/
+		AdminDao dao1 = new AdminDao();
+		ScoreDao dao2 = new ScoreDao();
+		List<Student> list1 = new ArrayList<Student>();
+		List<Score> list2 = new ArrayList<Score>();
+		//for(int i = 0; i < grade.length; i++) {
+			try {
+				list1 = dao1.getGradeStudent(grade);
+			} catch(Exception e) {
+				e.printStackTrace();
+			}
+			for(int j = 0; j < list1.size(); j++) {
+				try {
+					list2 = dao2.getAllScore(list1.get(j).getStuID(), csp);
+					for(int k = 0; k < list2.size(); k++) {
+						Score score = list2.get(k);
+		%>
+		<tr>
+		  <td><input type="checkbox" name="stuid" value=<%=score.getStuID()%>><%=score.getStuID()%></td>
+		  <td><%=score.getStuName()%></td>
+		  <td><%=score.getSession()%></td>
+		  <td><%=score.getTotal_score()%></td>
+		  <td><%=score.getScore_1()%></td>
+		  <td><%=score.getScore_2()%></td>
+		  <td><%=score.getScore_3()%></td>
+		  <td><%=score.getScore_4()%></td>
+		  <td><%=score.getScore_5()%></td>
+		  <td><a href="/CSP/jsp/scoreModify.jsp?stuID=<%=score.getStuID()%>&session=<%=score.getSession()%>">修改</a></td>          
+		</tr>          	
+		<%
+					}
+				} catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+		//}
+		%>
+		<tr><td><input type="submit" value="delete selected" onclick="a()"></td></tr>  
+	  </table>
+	</form>
+  </center>
+  <button type="button" onclick="window.location.href='/CSP/jsp/managerMain.jsp';">返回</button>
   </body>
 </html>

@@ -23,25 +23,35 @@ admin = (Admin) session.getAttribute("user");
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
+	 accept="*.xls,*.xlsx"
 	-->
 
   </head>
-
+  <script  type="text/javascript">
+    function check_upload(theform) {
+		var filename = document.getElementById("filename").value;
+		if(filename == "" ||filename == null || filename.indexOf(".xls")==-1) {
+		alert('只能上传.xls文件');
+		return false;
+		}
+	}
+  </script>
   <body>
+  
   	<center>
-	    <form action="servlet/ExcelTwoServlet" method="post" >
+	    <form action="servlet/ExcelTwoServlet" enctype="multipart/form-data" method="post" οnsubmit="return check_upload(this)" >
 	    	<select name = "csp">
 	    		<option value="" selected="selected">[选择CSP]</option>
-	    		<option value="CSP-16">CSP-16</option>
+	    		<!--<option value="CSP-16">CSP-16</option>
 	    		<option value="CSP-17">CSP-17</option>
-	    		<option value="CSP-18">CSP-18</option>
+	    		<option value="CSP-18">CSP-18</option>-->
 	    		<option value="CSP-19">CSP-19</option>
 	    		<option value="CSP-20">CSP-20</option>
 	    		<option value="CSP-21">CSP-21</option>
 	    		<option value="CSP-22">CSP-22</option>
 	    		<option value="CSP-23">CSP-23</option>
 	    		<option value="CSP-24">CSP-24</option>
-	    		<option value="CSP-25">CSP-25</option>
+	    		<!--<option value="CSP-25">CSP-25</option>
 	    		<option value="CSP-26">CSP-26</option>
 	    		<option value="CSP-27">CSP-27</option>
 	    		<option value="CSP-28">CSP-28</option>
@@ -61,12 +71,13 @@ admin = (Admin) session.getAttribute("user");
 	    		<option value="CSP-42">CSP-42</option>
 	    		<option value="CSP-43">CSP-43</option>
 	    		<option value="CSP-44">CSP-44</option>
-	    		<option value="CSP-45">CSP-45</option>
+	    		<option value="CSP-45">CSP-45</option>-->
 	    	</select>
-	    	<input type = "file" name = "scoreExcel" accept="*.xls,*.xlsx">
+	    	<input type = "file" id="filename" name = "scoreExcel"><br>
 	    	<!-- &nbsp;&nbsp;请选择文件路径上传学生信息表</br> -->
-	    	<input type = "submit" name = "submitTwo" value = "提交">
+	    	<input type="submit" value="提交">
 	    </form>
     </center>
+    <button type="button" onclick="window.location.href='/CSP/jsp/managerMain.jsp';">返回</button>
   </body>
 </html>

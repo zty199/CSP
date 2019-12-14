@@ -87,7 +87,7 @@ if(identity == 1) {
           <%
           } else {
           %>
-          <button type="button" onclick="">返回</button>
+          <button type="button" onclick="window.location='/CSP/jsp/managerMain.jsp';">返回</button>
           <%
           }
           %>

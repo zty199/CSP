@@ -28,34 +28,31 @@ public class ReadScoreExcel {
         @SuppressWarnings("resource")
 		HSSFWorkbook hssfWorkbook = new HSSFWorkbook(is);
         Score score = new Score();
-        StudentDao dao = new StudentDao();
-        
+        StudentDao dao1 = new StudentDao();
         List<Score> list = new ArrayList<Score>();
         // 循环工作表Sheet
-        
-        for (int numSheet = 3; numSheet < hssfWorkbook.getNumberOfSheets(); numSheet++) {
+        for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); numSheet++) {
             HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
             if (hssfSheet == null) {
                 continue;
             }
             // 循环行Row
-            for (int rowNum = 1; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
+            for (int rowNum = 2; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
                 HSSFRow hssfRow = hssfSheet.getRow(rowNum);
                 if (hssfRow != null) {
                     score = new Score();
-                    HSSFCell IDnum    = hssfRow.getCell(3);
-                    HSSFCell all_sc   = hssfRow.getCell(11);
-                    HSSFCell first    = hssfRow.getCell(12);
-                    HSSFCell second   = hssfRow.getCell(13);
-                    HSSFCell third    = hssfRow.getCell(14);
-                    HSSFCell fourth   = hssfRow.getCell(15);
-                    HSSFCell fifth    = hssfRow.getCell(16);
-                    HSSFCell rank_1   = hssfRow.getCell(17);
+                    HSSFCell IDnum = hssfRow.getCell(3);
+                    HSSFCell all_sc = hssfRow.getCell(11);
+                    HSSFCell first = hssfRow.getCell(12);
+                    HSSFCell second = hssfRow.getCell(13);
+                    HSSFCell third = hssfRow.getCell(14);
+                    HSSFCell fourth = hssfRow.getCell(15);
+                    HSSFCell fifth = hssfRow.getCell(16);
+                    HSSFCell rank_1 = hssfRow.getCell(17);
                     HSSFCell rank_all = hssfRow.getCell(18);
-                    
                     String ID = getValue(IDnum);
                     try {
-						String stuID = dao.getStuID(ID);
+						String stuID = dao1.getStuID(ID);
 						if(!stuID.equals("NO")) {
 							score.setSession(session);
 							score.setStuID(stuID);
@@ -79,7 +76,6 @@ public class ReadScoreExcel {
 		return list;
     }
     
-     @SuppressWarnings("static-access")
     private String getValue(HSSFCell hssfCell) {
     	if (hssfCell.getCellType() == CellType.BOOLEAN) {
         	// 返回布尔类型的值
@@ -92,4 +88,5 @@ public class ReadScoreExcel {
         	return String.valueOf(hssfCell.getStringCellValue());
         }
      }
+
 }

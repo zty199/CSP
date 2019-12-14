@@ -1,5 +1,5 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@ page import="cn.edu.njust.bean.*, cn.edu.njust.dao.*"%>
+<%@ page import="cn.edu.njust.bean.Admin, cn.edu.njust.dao.*"%>
 <jsp:include page="isAdmin.jsp"></jsp:include>
 <%
 String path = request.getContextPath();
@@ -26,10 +26,21 @@ admin = (Admin) session.getAttribute("user");
 	-->
 
   </head>
-  
+  <script  type="text/javascript">
+    function check_upload(theform) {
+		var filename = document.getElementById("filename").value;
+		if(filename == "" ||filename == null || filename.indexOf(".xls")==-1) {
+		alert('只能上传.xls文件');
+		return false;
+		}
+	}
+  </script>
   <body>
+  <%
+  if(!admin.getAdminGrade().equals("0000")) {
+  %>
     <center>
-	    <form action="servlet/ExcelOneServlet" method="post" >
+	    <form action="servlet/ExcelOneServlet" enctype="multipart/form-data" method="post" οnsubmit="return check_upload(this)" >
 	    	<select name = "grade">
 	    		<option value="" selected="selected">[选择年级]</option>
 	    		<option value="2015">2015级</option>
@@ -40,7 +51,7 @@ admin = (Admin) session.getAttribute("user");
 	    		<option value="2020">2020级</option>
 	    		<option value="2021">2021级</option>
 	    		<option value="2022">2022级</option>
-	    		<option value="2023">2023级</option>
+	    		<!--<option value="2023">2023级</option>
 	    		<option value="2024">2024级</option>
 	    		<option value="2025">2025级</option>
 	    		<option value="2026">2026级</option>
@@ -66,12 +77,15 @@ admin = (Admin) session.getAttribute("user");
 	    		<option value="2046">2046级</option>
 	    		<option value="2047">2047级</option>
 	    		<option value="2048">2048级</option>
-	    		<option value="2049">2049级</option>
+	    		<option value="2049">2049级</option>-->
 	    	</select>
-	    	<input type = "file" name = "studentExcel" accept="*.xls,*.xlsx">
-	    	<!-- &nbsp;&nbsp;请选择文件路径上传学生信息表</br> -->
+	    	<input type = "file" name = "studentExcel">
 	    	<input type = "submit" name = "submitOne" value = "提交">
 	    </form>
     </center>
+  <%
+  }
+  %>
+    <button type="button" onclick="window.location.href='/CSP/jsp/managerMain.jsp';">返回</button>
   </body>
 </html>

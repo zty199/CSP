@@ -13,15 +13,14 @@ public class SaveScore {
         ReadScoreExcel xlsMain = new ReadScoreExcel();
         ScoreDao dao = new ScoreDao();
         Score score = null;
-        List<Score> list = xlsMain.readXls(path, session);
-        List<Score> l = dao.getSessionScore(session);
-        
-        for (int i = 0; i < list.size(); i++) {
-            score = list.get(i);
+        List<Score> list1 = xlsMain.readXls(path, session);
+        List<Score> list2 = dao.getSessionScore(session);
+        for (int i = 0; i < list1.size(); i++) {
+            score = list1.get(i);
             //List l = DbUtil.selectOne(Common.SELECT_STUDENT_SQL + "'%" + student.getName() + "%'", student);
-            if (!l.contains(score)) {
+            if (!list2.contains(score)) {
             	dao.addScore(score);
-            	list.add(score);
+            	list1.add(score);
                 //DbUtil.insert(Common.INSERT_STUDENT_SQL, student);
             } else {
                 System.out.println("The Record was Exist, and has been throw away!");
