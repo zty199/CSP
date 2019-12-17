@@ -86,7 +86,7 @@ admin = (Admin) session.getAttribute("user");
   </head>
   
   <body>
-  	<h4>欢迎，<%=admin.getAdminGrade() %>年级管理员
+  	<h4>欢迎，<%=admin.getAdminGrade()%>年级管理员
   	<center><button type="button" onclick="window.location.href='/CSP/jsp/logout.jsp';">注销</button>&nbsp;&nbsp;</center>
   	</h4>
 	  <center>
@@ -101,7 +101,6 @@ admin = (Admin) session.getAttribute("user");
             </select>
             <input type="submit" value="查询成绩">
 	  	</form>
-	  	<%String grade = admin.getAdminGrade(); %>
 	  	<form action="jsp/studentDisplay.jsp"method="post">
 	  		<table  border="1">
 	  			<tr>
@@ -111,17 +110,18 @@ admin = (Admin) session.getAttribute("user");
 		  			<td></td>
 	  			</tr>
 	  			<%
-	  			AdminDao dao=new AdminDao();
+	  			String grade = admin.getAdminGrade();
+	  			AdminDao dao = new AdminDao();
 	  			List<Student> list=dao.getGradeStudent(grade);
-	  			for(int i=0; i<list.size(); i++) {
-	  				Student stu = new Student();
-	  				stu = list.get(i);
+	  			for(int i = 0; i < list.size(); i++) {
+	  				Student student = new Student();
+	  				student = list.get(i);
 	  			%>
 	  			<tr>
-	  			  <td><a href="/CSP/jsp/stuAllScore.jsp?stuID=<%=stu.getStuID()%>"><%=stu.getStuID()%></a></td>
-	  			  <td><%=stu.getStuName() %></td>
-	  			  <td><%=stu.getStuGrade() %></td>
-	  			  <td><a href="/CSP/jsp/studentModify.jsp?stuID=<%=stu.getStuID()%>">修改学生信息</a></td>
+	  			  <td><a href="/CSP/jsp/stuAllScore.jsp?stuID=<%=student.getStuID()%>"><%=student.getStuID()%></a></td>
+	  			  <td><%=student.getStuName() %></td>
+	  			  <td><%=student.getStuGrade() %></td>
+	  			  <td><a href="/CSP/jsp/studentModify.jsp?stuID=<%=student.getStuID()%>">修改学生信息</a></td>
 	  			</tr>
 	  			<%} %>
 	  		</table>

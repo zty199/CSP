@@ -46,6 +46,10 @@ if(identity == 1) {
       <table>
         <tr><td colspan="2">修改学生信息</td></tr>
         <tr>
+          <td>学号</td>
+          <td><input type="text" name="id" value="<%=student.getStuID()%>" onfocus="this.blur()"></td>
+        </tr>
+        <tr>
           <td>年级</td>
           <%
           if(identity == 0) {
@@ -54,27 +58,13 @@ if(identity == 1) {
           <%
           } else {
           %>
-          <td><input type="text" name="grade" value="<%=student.getStuGrade()%>"></td>
+          <td><input type="text" name="grade" value="<%=student.getStuGrade()%>" placeholder="请输入年级"></td>
           <%
           }
           %>
         </tr>
-        <tr>
-          <td>学号</td>
-          <%
-          if(identity == 0) {
-          %>
-          <td><input type="text" name="id" value="<%=student.getStuID()%>" onfocus="this.blur()"></td>
-          <%
-          } else {
-          %>
-          <td><input type="text" name="id" value="<%=student.getStuID()%>"></td>
-          <%
-          }
-          %>
-        </tr>
-        <tr><td>姓名</td><td><input type="text" name="name" value="<%=student.getStuName()%>"></td></tr>
-        <tr><td>身份证号</td><td><input type="text" name="pid" value="<%=student.getStuPersonID()%>" placeholder="请输入身份证号"></td></tr>
+        <tr><td>姓名</td><td><input type="text" name="name" value="<%=student.getStuName()%>" placeholder="请输入姓名"></td></tr>
+        <tr><td>身份证号</td><td><input type="text" name="pid" value="<%=student.getStuPersonID()%>" placeholder="请输入身份证号/护照号"></td></tr>
         <tr><td>登录密码</td><td><input type="password" name="pwd" value="<%=student.getStuPassword()%>" placeholder="请输入新密码"></td></tr>
         <tr><td>确认密码</td><td><input type="password" name="cpwd" value="<%=student.getStuPassword()%>" placeholder="请确认密码"></td></tr>
         <tr><td colspan="2">

@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*, javax.swing.*" pageEncoding="UTF-8"%>
 <%@ page import="cn.edu.njust.bean.*, cn.edu.njust.dao.*"%>
 <jsp:include page="isStudent.jsp"></jsp:include>
 <%
@@ -6,6 +6,12 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 Student student = new Student();
 student = (Student) session.getAttribute("user");
+if(session.getAttribute("open") == null || (int)session.getAttribute("open") == 0) {
+	JOptionPane.showMessageDialog(null, "尚未开启报名途径！");
+%>
+<jsp:forward page="studentMain.jsp"></jsp:forward> 
+<% 
+} 
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">

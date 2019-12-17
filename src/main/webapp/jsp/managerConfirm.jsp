@@ -32,7 +32,9 @@ admin = (Admin) session.getAttribute("user");
   if(admin.getAdminGrade().equals("0000")) {
   %>
   	<center>
-	    <form action="servlet/ConfirmServelt" method="post" >
+	    <form action="servlet/ConfirmServlet" method="post" >
+	      <input type="button" value="团报名单导出"> 
+		</form>
 	    <table border="1">
 	    	<tr>
 	    		<td>学号</td>
@@ -42,30 +44,29 @@ admin = (Admin) session.getAttribute("user");
 	    	<%
 	    	ConfirmDao dao = new ConfirmDao();
 	    	List<Confirm> list = dao.getAllConfirm();
-	    	for(int i=0; i<list.size(); i++) {
-	    		Confirm con = list.get(i);
+	    	for(int i = 0; i < list.size(); i++) {
+	    		Confirm confirm = list.get(i);
 	    	%>
 	    	<tr>
-	    		<td><input type="checkbox"name="stuID"value=<%=con.getStuID() %>><%=con.getStuID() %></td>
-	    		<td><%=con.getStuName() %></td>
-	    		<td><%=con.getIDnumber() %></td>
+	    		<td><input type="checkbox"name="stuID"value=<%=confirm.getStuID()%>><%=confirm.getStuID()%></td>
+	    		<td><%=confirm.getStuName()%></td>
+	    		<td><%=confirm.getIDnumber()%></td>
 	    	</tr>
 	    	<%
 	    	}
 	    	%>
 	    	<tr><td><input type="submit" value="确认移出团报名单"></td></tr>
 	    </table>
-	    </form>
     </center>
-    <button type="button" onclick="window.location.href='/CSP/jsp/managerMain.jsp';">返回</button>
   <%
   } else {
   %>
     <center>
-      <a href="jsp/login.jsp">您并无权限开启or关闭团报,请点此返回登录</a>
+      <a href="/CSP/jsp/login.jsp">您并无此权限,请点此返回登录</a>
     </center>
   <%
   }
   %>
+    <button type="button" onclick="window.location.href='/CSP/jsp/managerMain.jsp';">返回</button>
   </body>
 </html>

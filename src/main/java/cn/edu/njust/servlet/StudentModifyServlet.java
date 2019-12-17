@@ -53,8 +53,8 @@ public class StudentModifyServlet extends HttpServlet {
 					response.sendRedirect("../jsp/studentModify.jsp");
 					return;
 				}
-				if(student.getStuPersonID().length() != 18) {
-					JOptionPane.showMessageDialog(null, "身份证号格式错误！");
+				if(student.getStuPersonID().length() != 18 && student.getStuPersonID().length() != 8) {
+					JOptionPane.showMessageDialog(null, "身份证号/护照号格式错误！");
 					response.sendRedirect("../jsp/studentModify.jsp");
 					return;
 				}
@@ -120,8 +120,8 @@ public class StudentModifyServlet extends HttpServlet {
 					response.sendRedirect("../jsp/studentModify.jsp?stuID=" + student.getStuID());
 					return;
 				}
-				if(student.getStuPersonID().length() != 18) {
-					JOptionPane.showMessageDialog(null, "身份证号格式错误！");
+				if(student.getStuPersonID().length() != 18 && student.getStuPersonID().length() != 18) {
+					JOptionPane.showMessageDialog(null, "身份证号/护照号格式错误！");
 					response.sendRedirect("../jsp/studentModify.jsp?stuID=" + student.getStuID());
 					return;
 				}

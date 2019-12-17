@@ -32,7 +32,7 @@ admin = (Admin) session.getAttribute("user");
   if(admin.getAdminGrade().equals("0000")) {
   %>
   	<center>
-	    <form action="servlet/IntentionServelt" method="post" >
+	    <form action="servlet/IntentionServlet" method="post" >
 	    <table border="1">
 	    	<tr>
 	    		<td>学号</td>
@@ -42,13 +42,13 @@ admin = (Admin) session.getAttribute("user");
 	    	<%
 	    	IntentionDao dao = new IntentionDao();
 	    	List<Intention> list = dao.getAllIntention();
-	    	for(int i=0; i<list.size(); i++) {
-	    		Intention in = list.get(i);
+	    	for(int i = 0; i < list.size(); i++) {
+	    		Intention intention = list.get(i);
 	    	%>
 	    	<tr>
-	    		<td><input type="checkbox"name="stuID"value=<%=in.getStuID() %>><%=in.getStuID() %></td>
-	    		<td><%=in.getName() %></td>
-	    		<td><%=in.getIntention()%></td>
+	    		<td><input type="checkbox"name="stuID"value=<%=intention.getStuID()%>><%=intention.getStuID()%></td>
+	    		<td><%=intention.getName()%></td>
+	    		<td><%=intention.getIntention()%></td>
 	    	</tr>
 	    	<%
 	    	}
@@ -57,15 +57,15 @@ admin = (Admin) session.getAttribute("user");
 	    </table>
 	    </form>
     </center>
-    <button type="button" onclick="window.location.href='/CSP/jsp/managerMain.jsp';">返回</button>
   <%
   } else {
   %>
     <center>
-      <a href="jsp/login.jsp">您并无权限开启or关闭团报,请点此返回登录</a>
+      <a href="/CSP/jsp/login.jsp">您并无此权限,请点此返回登录</a>
     </center>
   <%
   }
   %>
+    <button type="button" onclick="window.location.href='/CSP/jsp/managerMain.jsp';">返回</button>
   </body>
 </html>

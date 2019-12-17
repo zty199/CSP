@@ -88,19 +88,14 @@ admin = (Admin) session.getAttribute("user");
   <body>
   	<center>
  	<form name="scoredisplay" action="jsp/scoreDisplay.jsp" method="post">
-  	  <input type="submit" value="refresh">
 	  <table border="1">
-	  <%
-	  String csp = request.getParameter("session");
-	  String grade = admin.getAdminGrade();
-	  %>
- 		<!--  <tr>
+ 		<tr>
 		  <td>all<input type="checkbox" name="allgrade" value="0000"id="checkall"></td>
 		  <td>2016<input type="checkbox" name="grade" value="2016"></td>
 		  <td>2017<input type="checkbox" name="grade" value="2017"></td>
 		  <td>2018<input type="checkbox" name="grade" value="2018"></td>
 		  <td>2019<input type="checkbox" name="grade" value="2019"></td>
-		  <td>CSP届数
+		  <!-- <td>CSP届数
 			<select name="cspnumber">
 			  <option value="CSP-17">CSP-17</option>
 			  <option value="CSP-18">CSP-18</option>
@@ -108,8 +103,9 @@ admin = (Admin) session.getAttribute("user");
 			  <option value="CSP-20">CSP-20</option>
 			  <option value="CSP-21">CSP-21</option>
             </select>
-		  </td>
-		</tr>-->
+		  </td> -->
+		  <td><input type="submit" value="refresh"></td>
+		</tr>
 		<tr>
 		  <td><input type="checkbox" id="stuID">学号</td>
 		  <td>姓名</td>
@@ -122,8 +118,9 @@ admin = (Admin) session.getAttribute("user");
 		  <td>第五题得分</td>
 		  <td></td>
 		</tr>
- 		<%
-		/* String[] grade = new String[4];
+		<%
+		String csp = request.getParameter("cspnumber");
+		String[] grade = new String[4];
 		if(request.getParameterValues("grade") == null) {
 			grade[0] = "2016";
 			grade[1] = "2017";
@@ -132,14 +129,13 @@ admin = (Admin) session.getAttribute("user");
 		} else {
 			grade = request.getParameterValues("grade");
 		}
-		*/
 		AdminDao dao1 = new AdminDao();
 		ScoreDao dao2 = new ScoreDao();
 		List<Student> list1 = new ArrayList<Student>();
 		List<Score> list2 = new ArrayList<Score>();
-		//for(int i = 0; i < grade.length; i++) {
+		for(int i = 0; i < grade.length; i++) {
 			try {
-				list1 = dao1.getGradeStudent(grade);
+				list1 = dao1.getGradeStudent(grade[i]);
 			} catch(Exception e) {
 				e.printStackTrace();
 			}
@@ -167,9 +163,13 @@ admin = (Admin) session.getAttribute("user");
 					e.printStackTrace();
 				}
 			}
-		//}
+		}
+		if(admin.getAdminGrade().equals("0000")) {
 		%>
-		<tr><td><input type="submit" value="delete selected" onclick="a()"></td></tr>  
+		<tr><td><input type="submit" value="delete selected" onclick="a()"></td></tr>
+		<%
+		}
+		%>
 	  </table>
 	</form>
   </center>

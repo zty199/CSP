@@ -26,7 +26,7 @@ admin = (Admin) session.getAttribute("user");
 	-->
 
   </head>
-  <script  type="text/javascript">
+  <script type="text/javascript">
     function check_upload(theform) {
 		var filename = document.getElementById("filename").value;
 		if(filename == "" ||filename == null || filename.indexOf(".xls")==-1) {
@@ -83,6 +83,10 @@ admin = (Admin) session.getAttribute("user");
 	    	<input type = "submit" name = "submitOne" value = "提交">
 	    </form>
     </center>
+  <%
+  } else {
+  %> 
+	<center><a href="jsp/login.jsp">您并无此权限,请点此返回登录</a></center>
   <%
   }
   %>

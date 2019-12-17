@@ -32,7 +32,7 @@ admin = (Admin) session.getAttribute("user");
   if(admin.getAdminGrade().equals("0000")) {
   %>
   	<center>
-	    <form action="servlet/OpenServelt" method="post" >
+	    <form action="servlet/OpenServlet" method="post" >
 	    	请输入筛选分数线：<input type = "text" name = "score">
 	    	<input type = "submit" name = "open" value = "开启团报报名">
 	    </form>
