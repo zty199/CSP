@@ -13,6 +13,10 @@
     <servlet-name>StudentDeleteServlet</servlet-name>
     <servlet-class>cn.edu.njust.servlet.StudentDeleteServlet</servlet-class>
   </servlet>
+    <servlet>
+    <servlet-name>StudentApplyServlet</servlet-name>
+    <servlet-class>cn.edu.njust.servlet.StudentApplyServlet</servlet-class>
+  </servlet>
   <servlet>
     <servlet-name>ScoreModifyServlet</servlet-name>
     <servlet-class>cn.edu.njust.servlet.ScoreModifyServlet</servlet-class>
@@ -37,6 +41,12 @@
     <servlet-name>CloseServlet</servlet-name>
     <servlet-class>cn.edu.njust.servlet.CloseServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>CalculateServlet</servlet-name>
+    <servlet-class>cn.edu.njust.servlet.CalculateServlet</servlet-class>
+  </servlet>
+
+
 
 
 
@@ -57,6 +67,10 @@
   <servlet-mapping>
     <servlet-name>StudentDeleteServlet</servlet-name>
     <url-pattern>/servlet/StudentDeleteServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>StudentApplyServlet</servlet-name>
+    <url-pattern>/servlet/StudentApplyServlet</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
     <servlet-name>ScoreModifyServlet</servlet-name>
@@ -81,6 +95,10 @@
   <servlet-mapping>
     <servlet-name>CloseServlet</servlet-name>
     <url-pattern>/servlet/CloseServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>CalculateServlet</servlet-name>
+    <url-pattern>/servlet/CalculateServlet</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

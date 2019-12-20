@@ -19,7 +19,7 @@ public class OpenServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
-        ServletContext sc = getServletConfig().getServletContext(); 
+        ServletContext sc = getServletConfig().getServletContext();
         if(sc.getAttribute("open") == null) {
         	sc.setAttribute("open", 0);
         }

@@ -21,7 +21,6 @@ public class LoginServlet extends HttpServlet {
 		this.doPost(request, response);
 	}
 
-	@SuppressWarnings("null")
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");

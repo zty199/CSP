@@ -41,9 +41,20 @@ if(session.getAttribute("open") == null || (int)session.getAttribute("open") == 
           <button type="button" onclick="window.location.href='/CSP/jsp/logout.jsp';">注销</button>&nbsp;&nbsp;
           <!-- <button type="button" onclick="window.location.href='/CSP/jsp/studentModify.jsp?identity=0';">修改信息</button> -->
         </td></tr>
-        <tr><td>序号</td><td>姓名</td><td>学号</td><td>资格</td><td>状态</td></tr>
+        <tr><td>序号</td><td>学号</td><td>姓名</td><td>资格</td><td>状态</td></tr>
+        <%
+        IntentionDao dao = new IntentionDao();
+        List<Intention> list = new ArrayList<Intention>();
+        list = dao.getAllIntention();
+        for(int i = 0; i < list.size(); i++) {
+        	Intention intention = new Intention();
+        %>
+        <tr><td><%=i%></td><td><%=intention.getStuID()%></td><td><%=intention.getName()%></td><td>待选拔</td></tr>
+        <%
+        }
+        %>
         <tr><td colspan="5">
-          <button type="button" onclick="">团报报名</button>
+          <button type="button" onclick="window.location.href='/CSP/servlet/StudentApplyServlet';">团报报名</button>
         </td></tr>
       </table>
     </center>

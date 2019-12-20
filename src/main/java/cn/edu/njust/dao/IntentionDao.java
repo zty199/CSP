@@ -34,7 +34,7 @@ public class IntentionDao {
 	//得到csp的所有intention
 	public List<Intention> getAllIntention() throws SQLException {
 		List<Intention> list = new ArrayList<Intention>();
-	    String sql = "select stu_overview.stuID, stu_overview.name,intention from stu_overview join intention_list on stu_overview.stuID = intention_list.stuID";
+	    String sql = "select stu_overview.stuID, stu_overview.name, intention from stu_overview join intention_list on stu_overview.stuID = intention_list.stuID";
 	    Connection conn = DbUtil.getCon();   
 	    try {
 	    	PreparedStatement pst = conn.prepareStatement(sql);
@@ -71,7 +71,7 @@ public class IntentionDao {
     }
 
     public boolean modifyIntentionInfo(String stuID, String name, int intention) throws SQLException {
-    	String sql = "update intention_list set name = ? where stuID = " + stuID + "";
+    	String sql = "update intention_list set name = ? where stuID = '" + stuID + "'";
     	Connection conn = DbUtil.getCon();
     	try {			
     		PreparedStatement pst = conn.prepareStatement(sql);
@@ -101,7 +101,7 @@ public class IntentionDao {
     }
 	
 	//通过学号添加Intention表
-	/*public boolean addIntention(String stuid) throws SQLException {
+	public boolean addIntention(String stuid) throws SQLException {
 		String sql = "insert into intention_list(stuID, name, intention) values (?, ?, ?)";
 		Connection conn = DbUtil.getCon();
 		try {
@@ -118,6 +118,6 @@ public class IntentionDao {
 			e.printStackTrace();
 			return false;
 		}
-	}*/
+	}
 
 }

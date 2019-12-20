@@ -179,5 +179,23 @@ public class StudentDao {
     		return false;
     	}
     }
+	
+	public boolean updateQuality(Student student) throws SQLException {
+    	String sql = "update stu_overview set public_free = ?, used_qual = ?, score_qual = ? where stuID = ?";
+    	Connection conn = DbUtil.getCon();
+    	try {			
+    		PreparedStatement pst = conn.prepareStatement(sql);
+    		pst.setBoolean(1, student.getPubFree());
+    		pst.setInt(2, student.getUsedNum());
+    		pst.setInt(3, student.getScoreNum());
+    		pst.setString(4, student.getStuID());
+    		int flag = pst.executeUpdate();
+    		pst.close();
+    		return flag > 0 ? true : false;
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    		return false;
+    	}
+    }
 
 }
