@@ -32,12 +32,15 @@ admin = (Admin) session.getAttribute("user");
   if(admin.getAdminGrade().equals("0000")) {
   %>
   	<center>
-	    <form action="servlet/OpenServlet" method="post" >
-	    	请输入筛选分数线：<input type = "text" name = "score">
+	    <form action="servlet/OpenServlet" method="post">
 	    	<input type = "submit" name = "open" value = "开启团报报名">
 	    </form>
 	    <form action="servlet/CloseServlet" method="post">
 	    	<input type = "submit" name = "close" value ="关闭团报入口">
+	    </form>
+	    <form action="servlet/CalculateServlet" method="post">
+	    	请输入筛选分数线：<input type = "text" name = "score">
+	    	<input type = "submit" name = "calculate" value ="计算">
 	    </form>
     </center>
     <button type="button" onclick="window.location.href='/CSP/jsp/managerMain.jsp';">返回</button>

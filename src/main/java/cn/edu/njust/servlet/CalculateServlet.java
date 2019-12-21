@@ -26,12 +26,18 @@ public class CalculateServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
         ServletContext sc = getServletConfig().getServletContext();
-        if(sc.getAttribute("score") == null) {
+        if(sc.getAttribute("open") == null || sc.getAttribute("open") == "0") {
         	JOptionPane.showMessageDialog(null, "请先开启团报再进行操作！");
         	response.sendRedirect("../jsp/managerOpen.jsp");
         	return;
         }
-        int s = (int) sc.getAttribute("score");
+        if(request.getParameter("score").equals("")) {
+        	JOptionPane.showMessageDialog(null, "请输入分数线！");
+        	response.sendRedirect("../jsp/managerOpen.jsp");
+        	return;
+        }
+        int s = Integer.parseInt(request.getParameter("score"));
+        sc.setAttribute("score", s);
         StudentDao dao = new StudentDao();
         List<Student> list = new ArrayList<Student>();
         try {

@@ -25,7 +25,7 @@ admin = (Admin) session.getAttribute("user");
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
 	
-	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
+	<script type="text/javascript" src="plugins/jquery/jquery-1.11.1.min.js"></script>
 	<script type="text/javascript">
 	function a()
 	{
