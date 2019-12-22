@@ -45,6 +45,16 @@
     <servlet-name>CalculateServlet</servlet-name>
     <servlet-class>cn.edu.njust.servlet.CalculateServlet</servlet-class>
   </servlet>
+  <servlet>
+    <servlet-name>ConfirmServlet</servlet-name>
+    <servlet-class>cn.edu.njust.servlet.ConfirmServlet</servlet-class>
+  </servlet>
+  <servlet>
+    <servlet-name>IntentionServlet</servlet-name>
+    <servlet-class>cn.edu.njust.servlet.IntentionServlet</servlet-class>
+  </servlet>
+
+
 
 
 
@@ -99,6 +109,14 @@
   <servlet-mapping>
     <servlet-name>CalculateServlet</servlet-name>
     <url-pattern>/servlet/CalculateServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>ConfirmServlet</servlet-name>
+    <url-pattern>/servlet/ConfirmServlet</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>IntentionServlet</servlet-name>
+    <url-pattern>/servlet/IntentionServlet</url-pattern>
   </servlet-mapping>
   <welcome-file-list>
     <welcome-file>index.html</welcome-file>

@@ -41,6 +41,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 		</div>
 	  </nav>
   	  <!-- /.navbar -->
+  	  
   	  <!-- Content Wrapper. Contains page content -->
   	  <div class="content-wrapper">
     	<!-- Main content -->
@@ -109,9 +110,10 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
     	  <!-- /.content -->
   		</div>
   		<!-- /.content-wrapper -->
-  	  <!-- Main Footer -->
-	</div>
-    <!-- ./wrapper -->
+  	    <!-- Main Footer -->
+	  </div>
+      <!-- ./wrapper -->
+    </div>
 
 	<!-- REQUIRED SCRIPTS -->
 

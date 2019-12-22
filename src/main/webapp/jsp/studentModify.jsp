@@ -200,6 +200,7 @@ if(identity == 1) {
   	  <!-- Main Footer -->
 	</div>
   	<!-- ./wrapper -->
+  	</div>
 
 	<!-- REQUIRED SCRIPTS -->
 

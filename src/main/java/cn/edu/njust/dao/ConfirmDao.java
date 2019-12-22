@@ -68,6 +68,22 @@ public class ConfirmDao {
         }
         return confirm;
     }
+	
+	public boolean inConfirm(String stuID) throws SQLException {
+        String sql = "select * from confirm_list where stuID = '" + stuID + "'";
+        Connection conn = DbUtil.getCon();
+        Confirm cf = new Confirm();
+        try {
+        	PreparedStatement pst = conn.prepareStatement(sql);
+        	ResultSet rs = pst.executeQuery();
+        	while(rs.next()) {
+        		return true;
+        	}
+        } catch (SQLException e) {
+        	e.printStackTrace();
+        }
+        return false;
+    }
 
     public boolean modifyConfirmInfo(String stuID, String name, String IDnumber) throws SQLException {
     	String sql = "update confirm_list set name = ? where stuID = " + stuID + "";

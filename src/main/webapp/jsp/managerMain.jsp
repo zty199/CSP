@@ -10,130 +10,244 @@ admin = (Admin) session.getAttribute("user");
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
-  <head>
+
+<head>
     <base href="<%=basePath%>">
-    
-    <title>My JSP 'managerMain.jsp' starting page</title>
-    
-	<meta http-equiv="pragma" content="no-cache">
-	<meta http-equiv="cache-control" content="no-cache">
-	<meta http-equiv="expires" content="0">    
-	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
-	<meta http-equiv="description" content="This is my page">
-	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-	<!--
-	<link rel="stylesheet" type="text/css" href="styles.css">
-	-->
-	
-	<script type="text/javascript" src="js/jquery-1.11.1.min.js"></script>
-	<script type="text/javascript">
-	function a()
-	{
-		managermain.action="servlet/ScoreDeleteServlet";
-		managermain.submit();
-	}
-	</script>
-	<script>
-	$(function () {
-		$("#checkall").click(function () {//判断全选框的改变
-	    	var flage = $(this).is(":checked");//全选选中为true，否则为false
-	        $("input[name=grade]").each(function () {
-	            $(this).prop("checked", flage);
-	        })
-	    });
-	    //当子元素都选全选选中，其中一个不选取消全选
-	    $("input[name=grade]").click(function () {
-	        var flage1 = true;
-	        for (var i = 0; i < $("input[name=grade]").length; i++) {
-	            if (!$($("input[name=grade]")[i]).is(":checked")) {
-	                flage1 = false;
-	                break;
-	            }
-	        }
-	        $("#checkall").prop("checked", flage1);
-	    })
-	})
-	
-	$(function () {
-	    $("#stuID").click(function () {//判断全选框的改变
-	        var flage = $(this).is(":checked");//全选选中为true，否则为false
-	        $("input[name=stuid]").each(function () {
-	            $(this).prop("checked", flage);
-	        })
-	    });
-	    //当子元素都选全选选中，其中一个不选取消全选
-	    $("input[name=stuid]").click(function () {
-	        var flage1 = true;
-	        for (var i = 0; i < $("input[name=stuid]").length; i++) {
-	             if (!$($("input[name=stuid]")[i]).is(":checked")) {
-	                 flage1 = false;
-	                 break;
-	             }
-	        }
-	        $("#stuID").prop("checked", flage1);
-	    })
-	})
-	<%/*$(document).ready(function(){
-        $("[name='allgrade']").click(function(){
-		    if($(this).is(':checked')){
-		        $("[name='grade']").prop('checked',true);
-		    }else{
-		    	$("[name='grade']").prop('checked',false);
-		    }	
-		})
-	});*/%>
-	</script>
-  </head>
-  
-  <body>
-  	<h4>欢迎，<%=admin.getAdminGrade()%>年级管理员
-  	<center><button type="button" onclick="window.location.href='/CSP/jsp/logout.jsp';">注销</button>&nbsp;&nbsp;</center>
-  	</h4>
-	  <center>
-	  	<form action="jsp/scoreDisplay.jsp" method="post">
-	  		CSP届数
-			<select name="session">
-			  <option value="17">CSP-17</option>
-			  <option value="18">CSP-18</option>
-			  <option value="19">CSP-19</option>
-			  <option value="20">CSP-20</option>
-			  <option value="21">CSP-21</option>
-            </select>
-            <input type="submit" value="查询成绩">
-	  	</form>
-	  	<form action="jsp/studentDisplay.jsp"method="post">
-	  		<table  border="1">
-	  			<tr>
-		  			<td>学号</td>
-		  			<td>姓名</td>
-		  			<td>年级</td>
-		  			<td></td>
-	  			</tr>
-	  			<%
-	  			String grade = admin.getAdminGrade();
-	  			AdminDao dao = new AdminDao();
-	  			List<Student> list=dao.getGradeStudent(grade);
-	  			for(int i = 0; i < list.size(); i++) {
-	  				Student student = new Student();
-	  				student = list.get(i);
-	  			%>
-	  			<tr>
-	  			  <td><a href="/CSP/jsp/stuAllScore.jsp?stuID=<%=student.getStuID()%>"><%=student.getStuID()%></a></td>
-	  			  <td><%=student.getStuName() %></td>
-	  			  <td><%=student.getStuGrade() %></td>
-	  			  <td><a href="/CSP/jsp/studentModify.jsp?stuID=<%=student.getStuID()%>">修改学生信息</a></td>
-	  			</tr>
-	  			<%} %>
-	  		</table>
-	  	</form>
-	  </center>
-  	
-  <ul>
-  	<li><a href="/CSP/jsp/importScore.jsp">导入成绩</a></li>
-  	<li><a href="/CSP/jsp/importStudent.jsp">导入学生</a></li>
-  	<li><a href="/CSP/jsp/managerOpen.jsp">开启团报</a></li>
-  	<li><a href="/CSP/jsp/managerIntention.jsp">团报意向管理</a></li>
-  	<li><a href="/CSP/jsp/managerConfirm.jsp">团报名单管理</a></li>
-  </ul>
-  </body>
+
+    <title>CSP考试团报管理系统 | 管理员主页</title>
+
+    <meta http-equiv="pragma" content="no-cache">
+    <meta http-equiv="cache-control" content="no-cache">
+    <meta http-equiv="expires" content="0">
+    <meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
+    <meta http-equiv="description" content="This is my page">
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/foundation.min.css">
+    <link rel="stylesheet" href="css/foundation-icons.css">
+    <link rel="stylesheet" href="css/foundation-icons.eot">
+    <link rel="stylesheet" href="css/foundation-icons.svg">
+    <link rel="stylesheet" href="css/foundation-icons.ttf">
+    <link rel="stylesheet" href="css/foundation-icons.woff">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="plugins/fontawesome-free/css/all.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="dist/css/adminlte.min.css">
+    <!-- Google Font: Source Sans Pro -->
+    <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
+    <link rel="stylesheet" href="dist/css/mycss.css">
+    <script src="js/jquery.min.js"></script>
+    <script src="js/foundation.min.js"></script>
+    <script src="js/modernizr.js"></script>
+
+</head>
+
+<body class="hold-transition layout-top-nav">
+    <div class="wrapper">
+
+        <!-- Navbar -->
+        <nav class="main-header navbar navbar-expand-md navbar-light navbar-purple">
+            <div class="container">
+                <a href="/CSP/jsp/managerMain.jsp" class="navbar-brand">
+                    <img src="/CSP/dist/njust.png" alt="ANJUST Logo" class="brand-image img-circle elevation-3">
+                    <span class="brand-text text-white font-weight-light"><strong>CSP团报管理系统</strong></span>
+                </a>
+                <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <!-- Right navbar links -->
+                <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+                    <div class="collapse navbar-collapse order-3" id="navbarCollapse">
+                        <!-- Left navbar links -->
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <a href="/CSP/jsp/managerMain.jsp" class="nav-link text-white">欢迎，<%=admin.getAdminGrade()%>级管理员!</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/CSP/jsp/managerMain.jsp" class="nav-link text-white">主页</a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="/CSP/jsp/logout.jsp" class="nav-link text-white">注销</a>
+                            </li>
+                        </ul>
+                    </div>
+                </ul>
+            </div>
+        </nav>
+        <!-- /.navbar -->
+
+        <div class="off-canvas-wrap" data-offcanvas style="height: 100%;">
+            <div class="inner-wrap" style="height: 100%;">
+                <nav class="tab-bar" style="background-color: #ffffff;">
+                    <section class="left-small" style="background-color: #68838b;">
+                        <a class="left-off-canvas-toggle menu-icon" href="#"><span></span></a>
+                    </section>
+                    <section class="middle tab-bar-section">
+                        <h1 class="title"></h1>
+                    </section>
+                </nav>
+                <aside class="left-off-canvas-menu" style="background-color: #68838b;height: 98%;">
+                    <ul class="off-canvas-list test" style="height: 98%;">
+                        <li><a href="/CSP/jsp/importScore.jsp"><i class="fi-text-color"
+                                    style="font-size:20px;color:white;"></i>
+                                <p style="color:white">导入成绩</p>
+                            </a></li>
+                        <li class="divider"></li>
+                        <li><a href="/CSP/jsp/importStudent.jsp"><i class="fi-torsos-all"
+                                    style="font-size:20px;color:white;"></i>
+                                <p style="color:white">导入学生</p>
+                            </a></li>
+                        <li class="divider"></li>
+                        <li><a href="/CSP/jsp/managerOpen.jsp"><i class="fi-play"
+                                    style="font-size:20px;color:white;"></i>
+                                <p style="color:white">开启团报</p>
+                            </a></li>
+                        <li class="divider"></li>
+                        <li><a href="/CSP/jsp/managerIntention.jsp"><i class="fi-widget"
+                                    style="font-size:20px;color:white;"></i>
+                                <p style="color:white">团报意向管理</p>
+                            </a></li>
+                        <li class="divider"></li>
+                        <li><a href="/CSP/jsp/managerConfirm.jsp"><i class="fi-widget"
+                                    style="font-size:20px;color:white;"></i>
+                                <p style="color:white">团报名单管理</p>
+                            </a></li>
+                        <li class="divider"></li>
+                    </ul>
+                </aside>
+
+                <section class="main-section">
+
+                    <!-- Content Wrapper. Contains page content -->
+                    <div class="content-wrapper">
+                        <!-- Content Header (Page header) -->
+                        <div class="content-header">
+                            <div class="container">
+                                <div class="row mb-3">
+                                </div>
+                                <!-- /.row -->
+                            </div>
+                            <!-- /.container-fluid -->
+                        </div>
+                        <!-- /.content-header -->
+
+                        <!-- Main content -->
+                        <center>
+                            <form action="jsp/scoreDisplay.jsp" method="post">
+                                CSP届数
+                                <select name="cspnumber">
+                                    <option value="17">CSP-17</option>
+                                    <option value="18">CSP-18</option>
+                                    <option value="19">CSP-19</option>
+                                    <option value="20">CSP-20</option>
+                                    <option value="21">CSP-21</option>
+                                </select>
+
+                                <style>
+                                    .button {
+                                        background-color: #4CAF50;
+                                        /* Green */
+                                        border: none;
+                                        color: white;
+                                        padding: 15px 32px;
+                                        text-align: center;
+                                        text-decoration: none;
+                                        display: inline-block;
+                                        font-size: 16px;
+                                        margin: 4px 2px;
+                                        cursor: pointer;
+                                    }
+                                    
+                                    .button3 {
+                                        border-radius: 8px;
+                                    }
+                                </style>
+
+                                <button type="submit" class="button button3">查询成绩</button>
+                            </form>
+                        </center>
+                        <div class="content">
+                            <div class="container">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <div class="card mb-5">
+                                            <div class="card-header">
+                                            </div>
+                                            <!-- /.card-header -->
+                                            <div class="card-body table-responsive p-0" style="height: 350px;">
+                                                <table class="table table-head-fixed">
+                                                    <thead>
+                                                        <tr>
+                                                            <th>学号</th>
+                                                            <th>姓名</th>
+                                                            <th>年级</th>
+                                                            <th>操作</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <%
+                                    					String grade = admin.getAdminGrade();
+                                    					AdminDao dao = new AdminDao();
+                                   						List<Student> list=dao.getGradeStudent(grade);
+                                    					for(int i = 0; i < list.size(); i++) {
+                                        					Student student = new Student();
+                                        					student = list.get(i);
+                                    					%>
+                                                            <tr>
+                                                                <td>
+                                                                    <%=student.getStuID()%>
+                                                                </td>
+                                                                <td>
+                                                                    <%=student.getStuName() %>
+                                                                </td>
+                                                                <td>
+                                                                    <%=student.getStuGrade() %>
+                                                                </td>
+                                                                <td>
+                                                                    <a href="/CSP/jsp/stuAllScore.jsp?stuID=<%=student.getStuID()%>">查看成绩</a>
+                                                                    <a href="/CSP/jsp/studentModify.jsp?stuID=<%=student.getStuID()%>">修改信息</a>
+                                                                </td>
+                                                            </tr>
+                                                            <%
+                                    }
+                                  %>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            <!-- /.card-body -->
+                                        </div>
+                                        <!-- /.card -->
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- /.container-fluid -->
+                        </div>
+                        <!-- /.content -->
+                    </div>
+                    <!-- /.content-wrapper -->
+
+                    <!-- Control Sidebar -->
+                    <aside class="control-sidebar control-sidebar-dark">
+                        <!-- Control sidebar content goes here -->
+                        <div class="p-3">
+                            <h5>Title</h5>
+                            <p>Sidebar content</p>
+                        </div>
+                    </aside>
+                    <!-- /.control-sidebar -->
+                </section>
+                <a class="exit-off-canvas"></a>
+            </div>
+            <!-- ./wrapper -->
+        </div>
+    </div>
+
+    <!-- 初始化 Foundation JS -->
+    <script>
+        $(document).ready(function() {
+            $(document).foundation();
+        })
+    </script>
+</body>
+
 </html>

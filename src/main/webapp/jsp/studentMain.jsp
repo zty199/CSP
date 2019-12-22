@@ -34,20 +34,20 @@ student = (Student) session.getAttribute("user");
   </head>
   
   <body class="hold-transition layout-top-nav">
-  <div class="wrapper">
+    <div class="wrapper">
   
-	<!-- Navbar -->
-	<nav class="main-header navbar navbar-expand-md navbar-light navbar-purple">
-	  <div class="container">
-      	<a href="/CSP/jsp/studentMain.jsp" class="navbar-brand">
-		  <img src="/CSP/dist/njust.png" alt="ANJUST Logo" class=" brand-image img-circle elevation-3"">
-          <span class="brand-text text-white font-weight-light"><strong>CSP团报管理系统</strong></span>
-      	</a>
-      	<button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-      	</button>
-  	  	<!-- Right navbar links -->
-  	  	<ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
+	  <!-- Navbar -->
+	  <nav class="main-header navbar navbar-expand-md navbar-light navbar-purple">
+	    <div class="container">
+      	  <a href="/CSP/jsp/studentMain.jsp" class="navbar-brand">
+		    <img src="/CSP/dist/njust.png" alt="ANJUST Logo" class=" brand-image img-circle elevation-3"">
+            <span class="brand-text text-white font-weight-light"><strong>CSP团报管理系统</strong></span>
+      	  </a>
+      	  <button class="navbar-toggler order-1" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+      	  </button>
+  	  	  <!-- Right navbar links -->
+  	  	  <ul class="order-1 order-md-3 navbar-nav navbar-no-expand ml-auto">
   	    	<div class="collapse navbar-collapse order-3" id="navbarCollapse">
   	      	  <!-- Left navbar links -->
   	      	  <ul class="navbar-nav">
@@ -62,123 +62,124 @@ student = (Student) session.getAttribute("user");
   			    </li>
   	          </ul>
   	    	</div>
-  	  	</ul>
-      </div>
-  	</nav>
-  	<!-- /.navbar -->
-
-  	<!-- Content Wrapper. Contains page content -->
-  	<div class="content-wrapper">
-      <!-- Content Header (Page header) -->
-      <div class="content-header">
-        <div class="container">
-          <div class="row mb-0">
-          </div><!-- /.row -->
-        </div><!-- /.container-fluid -->
-      </div>
-      <!-- /.content-header -->
-
-      <!-- Main content -->
-      <div class="content">
-        <div class="container">
-		  <div class="row">
-		    <div class="col-12">
-		      <div class="card card-red">
-		        <div class="card-header">
-		          <h3 class="card-title">考试成绩</h3>
-		        </div>
-		        <!-- /.card-header -->
-		        <div class="card-body table-responsive p-0" style="height: 350px;">
-		          <table class="table table-head-fixed">
-		            <thead>
-		              <tr>
-		                <th>CSP</th>
-		                <th>总分</th>
-		                <th>1</th>
-		                <th>2</th>
-					    <th>3</th>
-					    <th>4</th>
-					    <th>5</th>
-		              </tr>
-		            </thead>
-		            <%
-        			ScoreDao dao = new ScoreDao();
-        			List<Score> list = dao.getAllScore(student.getStuID());
-        			for(int i = 0; i < list.size(); i++) {
-        				Score score = list.get(i);
-        			%>
-        			<tbody>
-        			  <tr>
-          				<td><%=score.getSession()%></td>
-          				<td><%=score.getTotal_score()%></td>
-          				<td><%=score.getScore_1()%></td>
-          				<td><%=score.getScore_2()%></td>
-          				<td><%=score.getScore_3()%></td>
-          				<td><%=score.getScore_4()%></td>
-          				<td><%=score.getScore_5()%></td>
-        			  </tr>
-        			</tbody>
-        			<%
-        			}
-        			%>
-		          </table>
-		        </div>
-		        <!-- /.card-body -->
-		      </div>
-		      <!-- /.card -->
-			
-			  <div class="row">
-			    <div class="col-12">
-			      <div class="card card-primary">
-			        <div class="card-header">
-			          <h3 class="card-title">团报资格</h3>
-			        </div>
-			        <!-- /.card-header -->
-			        <div class="card-body">
-			          <div class="row">
-			          </div>
-			          <div class="row mt-4">
-			            <div class="col-sm-4">
-			              <div class="position-relative p-3 bg-gray" style="height: 180px">
-			                <div class="ribbon-wrapper ribbon-lg">
-			                  <div class="ribbon bg-success text-lg">公共</div>
-			                </div>
-			              	是否拥有免费的公共资格 <br> <br>
-			              	<big><%=student.getPubFree()%></big>
-			              </div>
-			            </div>
-			            <div class="col-sm-4">
-			              <div class="position-relative p-3 bg-gray" style="height: 180px">
-			                <div class="ribbon-wrapper ribbon-lg">
-			                  <div class="ribbon bg-warning text-lg">分数</div>
-			                </div>
-			             	 通过考试获取的资格 <br> <br>
-			                <big><%=student.getScoreNum()%>&nbsp;次</big>&nbsp;
-			              </div>
-			            </div>
-					    <div class="social-auth-links text-center col-sm-4">
-						    <br></br>
-					      <a href="/CSP/jsp/studentApply.jsp" class="btn btn-block btn-purple col-8 m-auto">
-					        <i class="fas fa-user-plus mr-2"></i> 进行团报
-					      </a>
-					    </div>
-			          </div>
-			        </div>
-			        <!-- /.card-body -->
-			      </div>
-			      <!-- /.card -->
-			    </div>
-			    <!-- /.col -->
-			  </div>
-			  <!-- /.row -->
-		    </div>
-		  </div>
+  	  	  </ul>
         </div>
-        <!-- /.content -->
+  	  </nav>
+  	  <!-- /.navbar -->
+
+  	  <!-- Content Wrapper. Contains page content -->
+  	  <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <div class="content-header">
+          <div class="container">
+            <div class="row mb-0">
+            </div><!-- /.row -->
+          </div><!-- /.container-fluid -->
+        </div>
+        <!-- /.content-header -->
+
+        <!-- Main content -->
+        <div class="content">
+          <div class="container">
+		    <div class="row">
+		      <div class="col-12">
+		        <div class="card card-red">
+		          <div class="card-header">
+		            <h3 class="card-title">考试成绩</h3>
+		          </div>
+		          <!-- /.card-header -->
+		          <div class="card-body table-responsive p-0" style="height: 350px;">
+		            <table class="table table-head-fixed">
+		              <thead>
+		                <tr>
+		                  <th>CSP</th>
+		                  <th>总分</th>
+		                  <th>1</th>
+		                  <th>2</th>
+					      <th>3</th>
+					      <th>4</th>
+					      <th>5</th>
+		                </tr>
+		              </thead>
+		              <%
+        			  ScoreDao dao = new ScoreDao();
+        			  List<Score> list = dao.getAllScore(student.getStuID());
+        			  for(int i = 0; i < list.size(); i++) {
+        				  Score score = list.get(i);
+        			  %>
+        			  <tbody>
+        			    <tr>
+          				  <td><%=score.getSession()%></td>
+          				  <td><%=score.getTotal_score()%></td>
+          				  <td><%=score.getScore_1()%></td>
+          				  <td><%=score.getScore_2()%></td>
+          				  <td><%=score.getScore_3()%></td>
+          				  <td><%=score.getScore_4()%></td>
+          				  <td><%=score.getScore_5()%></td>
+        			    </tr>
+        			  </tbody>
+        			  <%
+        			  }
+        			  %>
+		            </table>
+		          </div>
+		          <!-- /.card-body -->
+		        </div>
+		        <!-- /.card -->
+			
+			    <div class="row">
+			      <div class="col-12">
+			        <div class="card card-primary">
+			          <div class="card-header">
+			            <h3 class="card-title">团报资格</h3>
+			          </div>
+			          <!-- /.card-header -->
+			          <div class="card-body">
+			            <div class="row">
+			            </div>
+			            <div class="row mt-4">
+			              <div class="col-sm-4">
+			                <div class="position-relative p-3 bg-gray" style="height: 180px">
+			                  <div class="ribbon-wrapper ribbon-lg">
+			                    <div class="ribbon bg-success text-lg">公共</div>
+			                  </div>
+			              	  是否拥有免费的公共资格 <br> <br>
+			              	  <big><%=student.getPubFree()%></big>
+			                </div>
+			              </div>
+			              <div class="col-sm-4">
+			                <div class="position-relative p-3 bg-gray" style="height: 180px">
+			                  <div class="ribbon-wrapper ribbon-lg">
+			                    <div class="ribbon bg-warning text-lg">分数</div>
+			                  </div>
+			             	   通过考试获取的资格 <br> <br>
+			                  <big><%=student.getScoreNum()%>&nbsp;次</big>&nbsp;
+			                </div>
+			              </div>
+					      <div class="social-auth-links text-center col-sm-4">
+						      <br></br>
+					        <a href="/CSP/jsp/studentApply.jsp" class="btn btn-block btn-purple col-8 m-auto">
+					          <i class="fas fa-user-plus mr-2"></i> 进行团报
+					        </a>
+					      </div>
+			            </div>
+			          </div>
+			          <!-- /.card-body -->
+			        </div>
+			        <!-- /.card -->
+			      </div>
+			      <!-- /.col -->
+			    </div>
+			    <!-- /.row -->
+		      </div>
+		    </div>
+          </div>
+          <!-- /.content -->
+        </div>
+        <!-- /.content-wrapper -->
       </div>
-      <!-- /.content-wrapper -->
+      <!-- ./wrapper -->
     </div>
-    <!-- ./wrapper -->
 
  	<!-- REQUIRED SCRIPTS -->
 

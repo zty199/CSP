@@ -26,7 +26,7 @@ public class CalculateServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
         ServletContext sc = getServletConfig().getServletContext();
-        if(sc.getAttribute("open") == null || sc.getAttribute("open") == "0") {
+        if(sc.getAttribute("open") == null || sc.getAttribute("open").equals(0)) {
         	JOptionPane.showMessageDialog(null, "请先开启团报再进行操作！");
         	response.sendRedirect("../jsp/managerOpen.jsp");
         	return;
@@ -48,6 +48,7 @@ public class CalculateServlet extends HttpServlet {
 		}
         for(int i = 0; i < list.size(); i++) {
         	Student student = list.get(i);
+        	student.setScoreNum(0);
         	ScoreDao dao1 = new ScoreDao();
         	List<Score> list1 = new ArrayList<Score>();
         	try {
