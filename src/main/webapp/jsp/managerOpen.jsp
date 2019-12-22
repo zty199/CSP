@@ -19,7 +19,7 @@ if(!admin.getAdminGrade().equals("0000")) {
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'managerOpen.jsp' starting page</title>
+    <title>CSP考试团报管理系统 | 团报开关</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -139,18 +139,28 @@ if(!admin.getAdminGrade().equals("0000")) {
                         border-radius: 8px;
                       }
                     </style>
+                    <form action="servlet/CalculateServlet" method="post">
+                		请输入筛选分数线：<input type="text" name="score">
+                  		<button type="submit" class="button button3">计算</button>
+                  	</form>
+                  	<%
+                  	ServletContext sc = getServletConfig().getServletContext();
+                  	if(sc.getAttribute("score") == null) {
+                  	%>
+                  	<input type="text" name="current" placeholder="当前未更新达线人数" onfocus="this.blur()">
+                  	<%
+                  	} else {
+                  	%>
+                  	<input type="text" name="current" value="当前分数线：<%=sc.getAttribute("score")%>&nbsp;当前达线人数：<%=sc.getAttribute("num")%>" onfocus="this.blur()">
+                  	<%
+                  	}
+                  	%>
                     <form action="servlet/OpenServlet" method="post">
-                    <button type="submit" class="button button3">开启团报报名</button>
+                    	<button type="submit" class="button button3">开启团报报名</button>
                     </form>
                     <form action="servlet/CloseServlet" method="post">
-                    <button type="submit" class="button button3">关闭团报入口</button>
+                    	<button type="submit" class="button button3">关闭团报入口</button>
                     </form>
-                    
-                    
-                <form action="servlet/CalculateServlet" method="post">
-                	请输入筛选分数线：<input type="text" name="score">
-                  <button class="button button3">计算</button>
-                  </form>
                 </div>
             </center>
         </section>

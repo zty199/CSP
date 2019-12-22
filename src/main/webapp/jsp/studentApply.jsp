@@ -6,7 +6,8 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 Student student = new Student();
 student = (Student) session.getAttribute("user");
-if(session.getAttribute("open") == null || (int)session.getAttribute("open") == 0) {
+ServletContext sc = getServletConfig().getServletContext();
+if(sc.getAttribute("open") == null || sc.getAttribute("open").equals(0)) {
 	JOptionPane.showMessageDialog(null, "尚未开启报名途径！");
 %>
 <jsp:forward page="studentMain.jsp"></jsp:forward> 
@@ -19,7 +20,7 @@ if(session.getAttribute("open") == null || (int)session.getAttribute("open") == 
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'studentMain.jsp' starting page</title>
+    <title>CSP考试团报管理系统 | 学生报名</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">
@@ -58,7 +59,7 @@ if(session.getAttribute("open") == null || (int)session.getAttribute("open") == 
   	      	  <!-- Left navbar links -->
   	      	  <ul class="navbar-nav">
   	        	<li class="nav-item">
-  	          	  <a href="/CSP/jsp/studentModify.jsp" class="nav-link text-white"><%=student.getStuName()%>&nbsp;同学，您好！</a>
+  	          	  <a href="/CSP/jsp/studentModify.jsp" class="nav-link text-white" target="_blank"><%=student.getStuName()%>&nbsp;同学，您好！</a>
   	            </li>
   	            <li class="nav-item">
   	              <a href="/CSP/jsp/studentMain.jsp" class="nav-link text-white">主页</a>
@@ -136,7 +137,7 @@ if(session.getAttribute("open") == null || (int)session.getAttribute("open") == 
 			  </div>
 			
 			  <div class="social-auth-links text-center  mb-3">
-			    <a href="/CSP/servlet/studentMain.jsp" class="btn btn-block btn-purple col-4 m-auto">
+			    <a href="/CSP/jsp/studentMain.jsp" class="btn btn-block btn-purple col-4 m-auto">
 			      <i class="fas fa-sign-out-alt mr-2"></i> 返回
 			    </a>
 			  </div>

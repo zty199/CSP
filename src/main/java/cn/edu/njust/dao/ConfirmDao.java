@@ -52,7 +52,7 @@ public class ConfirmDao {
     }
 
 	public Confirm getSelectedConfirm(String stuID) throws SQLException {
-        String sql = "select stuID, name, IDnumber where stuID = '" + stuID + "'";
+        String sql = "select stuID, name, IDnumber from confirm_list where stuID = '" + stuID + "'";
         Connection conn = DbUtil.getCon();
         Confirm confirm = new Confirm();
         try {
@@ -68,6 +68,27 @@ public class ConfirmDao {
         }
         return confirm;
     }
+	
+	public boolean isListed(String stuID) throws SQLException {
+		String sql = "select * from confirm_list where stuID = '" + stuID + "'";
+		Connection conn = DbUtil.getCon();
+		Confirm confirm = new Confirm();
+    	try {
+    		PreparedStatement pst = conn.prepareStatement(sql);
+    		ResultSet rs = pst.executeQuery();
+    		while (rs.next()) {
+    			confirm.setStuID(rs.getString("stuID"));
+    		}
+    		rs.close();
+    		pst.close();
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+    	if(confirm.getStuID() != null && confirm.getStuID().equals(stuID))
+    		return true;
+    	else
+    		return false;
+	}
 	
 	public boolean inConfirm(String stuID) throws SQLException {
         String sql = "select * from confirm_list where stuID = '" + stuID + "'";
@@ -134,7 +155,7 @@ public class ConfirmDao {
     }
 	
 	public boolean addConfirm(String stuid) throws SQLException {
-    	String sql = "insert into confirm_list(stuID, name, IDnumbe) values (?, ?, ?)";
+    	String sql = "insert into confirm_list(stuID, name, IDnumber) values (?, ?, ?)";
     	Connection conn = DbUtil.getCon();
     	try {
     		StudentDao dao = new StudentDao();

@@ -13,7 +13,7 @@ admin = (Admin) session.getAttribute("user");
   <head>
     <base href="<%=basePath%>">
     
-    <title>My JSP 'scoreDisplay.jsp' starting page</title>
+    <title>CSP考试团报管理系统 | 成绩表管理</title>
     
 	<meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">

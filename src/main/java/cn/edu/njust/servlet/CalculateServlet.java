@@ -26,11 +26,6 @@ public class CalculateServlet extends HttpServlet {
 		response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
         ServletContext sc = getServletConfig().getServletContext();
-        if(sc.getAttribute("open") == null || sc.getAttribute("open").equals(0)) {
-        	JOptionPane.showMessageDialog(null, "请先开启团报再进行操作！");
-        	response.sendRedirect("../jsp/managerOpen.jsp");
-        	return;
-        }
         if(request.getParameter("score").equals("")) {
         	JOptionPane.showMessageDialog(null, "请输入分数线！");
         	response.sendRedirect("../jsp/managerOpen.jsp");
@@ -38,6 +33,8 @@ public class CalculateServlet extends HttpServlet {
         }
         int s = Integer.parseInt(request.getParameter("score"));
         sc.setAttribute("score", s);
+        int num = 0, i, j;
+        sc.setAttribute("num", 0);
         StudentDao dao = new StudentDao();
         List<Student> list = new ArrayList<Student>();
         try {
@@ -46,7 +43,7 @@ public class CalculateServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        for(int i = 0; i < list.size(); i++) {
+        for(i = 0; i < list.size(); i++) {
         	Student student = list.get(i);
         	student.setScoreNum(0);
         	ScoreDao dao1 = new ScoreDao();
@@ -57,26 +54,31 @@ public class CalculateServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-        	for(int j = 0; j < list1.size(); j++) {
+        	for(j = 0; j < list1.size(); j++) {
         		Score score = list1.get(j);
         		if(score.getTotal_score() >= s) {
         			student.setScoreNum(student.getScoreNum() + 1);
         		}
         	}
+        	if(student.getScoreNum() - student.getUsedNum() > 0)
+        		num++;
         	try {
-				if(dao.updateQuality(student)) {
-					JOptionPane.showMessageDialog(null, "数据更新成功！");
-		        	response.sendRedirect("../jsp/managerMain.jsp");
-		        	return;
-				} else {
+				if(!dao.updateQuality(student)) {
 					JOptionPane.showMessageDialog(null, "未知原因，数据更新失败！");
-		        	response.sendRedirect("../jsp/managerOpen.jsp");
-		        	return;
+		        	break;
 				}
 			} catch (SQLException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
+        	if(j != list1.size()) {
+        		response.sendRedirect("../jsp/managerOpen.jsp");
+        	} else {
+        		sc.setAttribute("num", num);
+        		JOptionPane.showMessageDialog(null, "数据更新成功！符合条件人数： " + num);
+        		response.sendRedirect("../jsp/managerOpen.jsp");
+        		return;
+        	}
         }
 	}
 

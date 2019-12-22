@@ -53,7 +53,7 @@ public class IntentionDao {
 	}
 
 	public Intention getSelectedIntention(String stuID) throws SQLException {
-        String sql = "select stuID, name, intention where stuID = '" + stuID + "'";
+        String sql = "select stuID, name, intention from intention_list where stuID = '" + stuID + "'";
         Connection conn = DbUtil.getCon();
         Intention intention = new Intention();
         try {
@@ -69,6 +69,27 @@ public class IntentionDao {
         }
         return intention;
     }
+	
+	public boolean isListed(String stuID) throws SQLException {
+		String sql = "select * from intention_list where stuID = '" + stuID + "'";
+		Connection conn = DbUtil.getCon();
+		Intention intention = new Intention();
+    	try {
+    		PreparedStatement pst = conn.prepareStatement(sql);
+    		ResultSet rs = pst.executeQuery();
+    		while (rs.next()) {
+    			intention.setStuID(rs.getString("stuID"));
+    		}
+    		rs.close();
+    		pst.close();
+    	} catch (SQLException e) {
+    		e.printStackTrace();
+    	}
+    	if(intention.getStuID() != null && intention.getStuID().equals(stuID))
+    		return true;
+    	else
+    		return false;
+	}
 
     public boolean modifyIntentionInfo(String stuID, String name, int intention) throws SQLException {
     	String sql = "update intention_list set name = ? where stuID = '" + stuID + "'";

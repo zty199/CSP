@@ -23,11 +23,11 @@ public class StudentApplyServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
-        Student student = (Student) request.getAttribute("user");
+        Student student = (Student) request.getSession().getAttribute("user");
         IntentionDao itt = new IntentionDao();
         ConfirmDao cf = new ConfirmDao();
         try {
-			if(itt.getSelectedIntention(student.getStuID()) != null || cf.getSelectedConfirm(student.getStuID()) != null) {
+			if(itt.isListed(student.getStuID()) || cf.isListed(student.getStuID())) {
 				JOptionPane.showMessageDialog(null, "您已经参与团报！");
 	        	response.sendRedirect("../jsp/studentApply.jsp");
 	        	return;
@@ -36,13 +36,14 @@ public class StudentApplyServlet extends HttpServlet {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        if(student.getPubFree() == false && student.getScoreNum() - student.getUsedNum() <= 0) {
+        if(student.getPubFree() == false && student.getScoreNum() <= 0) {
         	JOptionPane.showMessageDialog(null, "您没有公费考试资格！");
         	response.sendRedirect("../jsp/studentMain.jsp");
         	return;
         } else {
-        	if(student.getScoreNum() - student.getUsedNum() > 0) {
+        	if(student.getScoreNum() > 0) {
         		student.setUsedNum(student.getUsedNum() + 1);
+        		student.setScoreNum(student.getScoreNum() - 1);
         		StudentDao dao = new StudentDao();
         		try {
         			if(dao.updateQuality(student)) {

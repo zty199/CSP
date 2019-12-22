@@ -117,6 +117,39 @@ admin = (Admin) session.getAttribute("user");
                 </aside>
 
                 <section class="main-section">
+                	<center>
+                        <form action="jsp/scoreDisplay.jsp" method="post">
+                            CSP届数
+                            <select name="cspnumber">
+                                <option value="17">CSP-17</option>
+                                <option value="18">CSP-18</option>
+                                <option value="19">CSP-19</option>
+                                <option value="20">CSP-20</option>
+                                <option value="21">CSP-21</option>
+                            </select>
+                            <style>
+                                .button {
+                                    background-color: #4CAF50;
+                                    /* Green */
+                                    border: none;
+                                    color: white;
+                                    padding: 15px 32px;
+                                    text-align: center;
+                                    text-decoration: none;
+                                    display: inline-block;
+                                    font-size: 16px;
+                                    margin: 4px 2px;
+                                    cursor: pointer;
+                                }
+                                    
+                                .button3 {
+                                    border-radius: 8px;
+                                }
+                            </style>
+                            
+                            <button type="submit" class="button button3">查询成绩</button>
+                        </form>
+                    </center>
 
                     <!-- Content Wrapper. Contains page content -->
                     <div class="content-wrapper">
@@ -132,40 +165,6 @@ admin = (Admin) session.getAttribute("user");
                         <!-- /.content-header -->
 
                         <!-- Main content -->
-                        <center>
-                            <form action="jsp/scoreDisplay.jsp" method="post">
-                                CSP届数
-                                <select name="cspnumber">
-                                    <option value="17">CSP-17</option>
-                                    <option value="18">CSP-18</option>
-                                    <option value="19">CSP-19</option>
-                                    <option value="20">CSP-20</option>
-                                    <option value="21">CSP-21</option>
-                                </select>
-
-                                <style>
-                                    .button {
-                                        background-color: #4CAF50;
-                                        /* Green */
-                                        border: none;
-                                        color: white;
-                                        padding: 15px 32px;
-                                        text-align: center;
-                                        text-decoration: none;
-                                        display: inline-block;
-                                        font-size: 16px;
-                                        margin: 4px 2px;
-                                        cursor: pointer;
-                                    }
-                                    
-                                    .button3 {
-                                        border-radius: 8px;
-                                    }
-                                </style>
-
-                                <button type="submit" class="button button3">查询成绩</button>
-                            </form>
-                        </center>
                         <div class="content">
                             <div class="container">
                                 <div class="row">
@@ -185,32 +184,31 @@ admin = (Admin) session.getAttribute("user");
                                                         </tr>
                                                     </thead>
                                                     <tbody>
-                                                        <%
-                                    					String grade = admin.getAdminGrade();
-                                    					AdminDao dao = new AdminDao();
-                                   						List<Student> list=dao.getGradeStudent(grade);
-                                    					for(int i = 0; i < list.size(); i++) {
-                                        					Student student = new Student();
-                                        					student = list.get(i);
-                                    					%>
-                                                            <tr>
-                                                                <td>
-                                                                    <%=student.getStuID()%>
-                                                                </td>
-                                                                <td>
-                                                                    <%=student.getStuName() %>
-                                                                </td>
-                                                                <td>
-                                                                    <%=student.getStuGrade() %>
-                                                                </td>
-                                                                <td>
-                                                                    <a href="/CSP/jsp/stuAllScore.jsp?stuID=<%=student.getStuID()%>">查看成绩</a>
-                                                                    <a href="/CSP/jsp/studentModify.jsp?stuID=<%=student.getStuID()%>">修改信息</a>
-                                                                </td>
-                                                            </tr>
-                                                            <%
-                                    }
-                                  %>
+                                                    <%
+                                    				String grade = admin.getAdminGrade();
+                                    				AdminDao dao = new AdminDao();
+                                   					List<Student> list=dao.getGradeStudent(grade);
+                                    				for(int i = 0; i < list.size(); i++) {
+                                        				Student student = new Student();
+                                        				student = list.get(i);
+                                    				%>
+                                                        <tr>
+                                                            <td>
+                                                                <%=student.getStuID()%>
+                                                            </td>
+                                                            <td>
+                                                                <%=student.getStuName() %>
+                                                            </td>
+                                                            <td>
+                                                                <%=student.getStuGrade() %>
+                                                            </td>
+                                                            <td>
+                                                                <a href="/CSP/jsp/studentModify.jsp?stuID=<%=student.getStuID()%>" target="_blank">修改信息</a>
+                                                            </td>
+                                                        </tr>
+                                                    <%
+                                    				}
+                                  					%>
                                                     </tbody>
                                                 </table>
                                             </div>

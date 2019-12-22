@@ -12,7 +12,9 @@ admin = (Admin) session.getAttribute("user");
 <html>
 
 <head>
-    <title>importstudent.html</title>
+	<base href="<%=basePath%>">
+
+    <title>CSP考试团报管理系统 | 导入学生表</title>
 
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
@@ -127,6 +129,7 @@ admin = (Admin) session.getAttribute("user");
                 </aside>
 
                 <section class="main-section">
+
                     <center>
                         <form action="servlet/ExcelOneServlet" enctype="multipart/form-data" method="post" οnsubmit="return check_upload(this)">
                             <select name="grade">

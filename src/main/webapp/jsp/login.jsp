@@ -97,7 +97,14 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 	</form>  
             		<div class="social-auth-links text-center mb-3">
             		  <p>- OR -</p>
-            		  <a href="javascript:history.back(-1);" class="btn btn-block btn-default col-3 m-auto">返回</a>
+            		  <script type="text/javascript">
+						function exit() {
+						window.opener=null;
+						window.open("","_self");
+						window.close();
+						};
+					  </script>
+            		  <a onclick="exit()" class="btn btn-block btn-default col-3 m-auto">退出系统</a>
 					</div>
 				  </div>
 				</div>

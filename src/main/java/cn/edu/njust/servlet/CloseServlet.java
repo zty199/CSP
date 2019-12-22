@@ -22,7 +22,6 @@ public class CloseServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         ServletContext sc = getServletConfig().getServletContext();
         sc.setAttribute("open", 0);
-        sc.removeAttribute("score");
         JOptionPane.showMessageDialog(null, "团报入口已经关闭！");
         response.sendRedirect("../jsp/managerOpen.jsp");
         return;

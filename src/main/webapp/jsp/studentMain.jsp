@@ -52,7 +52,7 @@ student = (Student) session.getAttribute("user");
   	      	  <!-- Left navbar links -->
   	      	  <ul class="navbar-nav">
   	        	<li class="nav-item">
-  	          	  <a href="/CSP/jsp/studentModify.jsp" class="nav-link text-white"><%=student.getStuName()%>&nbsp;同学，您好！</a>
+  	          	  <a href="/CSP/jsp/studentModify.jsp" class="nav-link text-white" target="_blank"><%=student.getStuName()%>&nbsp;同学，您好！</a>
   	            </li>
   	            <li class="nav-item">
   	              <a href="/CSP/jsp/studentMain.jsp" class="nav-link text-white">主页</a>

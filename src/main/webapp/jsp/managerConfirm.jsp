@@ -18,7 +18,9 @@ if(!admin.getAdminGrade().equals("0000")) {
 <html>
 
 <head>
-    <title>managerConfirm.html</title>
+	<base href="<%=basePath%>">
+
+    <title>CSP考试团报管理系统 | 团报名单</title>
 
     <meta http-equiv="pragma" content="no-cache">
     <meta http-equiv="cache-control" content="no-cache">
@@ -54,7 +56,7 @@ if(!admin.getAdminGrade().equals("0000")) {
         <nav class="main-header navbar navbar-expand-md navbar-light navbar-purple">
             <div class="container ">
                 <a href="/CSP/jsp/managerMain.jsp" class="navbar-brand">
-					<img src="dist/njust.png" alt="ANJUST Logo" class=" brand-image img-circle elevation-3"">
+					<img src="/CSP/dist/njust.png" alt="ANJUST Logo" class=" brand-image img-circle elevation-3"">
         			<span class=" brand-text text-white font-weight-light"><strong>CSP团报管理系统</strong></span>
 				</a>
 
@@ -151,17 +153,29 @@ if(!admin.getAdminGrade().equals("0000")) {
                                             </div>
                                             <!-- /.card-header -->
                                             <div class="card-body table-responsive p-0" style="height: 350px;">
-
-                                                <form action="servlet/ConfirmServlet" method="post">
-                                                    <input type="button" value="团报名单导出">
-                                                </form>
-                                                <tr>
-                                                    <td><input type="submit" value="确认移出团报名单"></td>
-                                                </tr>
-                                                </table>
-
                                                 <table class="table table-head-fixed">
                                                     <thead>
+                                                   		<style>
+                      									.button {
+                        								background-color: #4CAF50;
+                        								/* Green */
+                        								border: none;
+                        								color: white;
+                        								padding: 15px 32px;
+                        								text-align: center;
+                        								text-decoration: none;
+                        								display: inline-block;
+                        								font-size: 16px;
+                        								margin: 4px 2px;
+                        								cursor: pointer;
+                      									}
+                      									.button3 {
+                       									 border-radius: 8px;
+                      									}
+                      									</style>
+                      									<tr><td colspan="3"><center>
+                                                			<button type="button" class="button button3" onclick="window.location.href='/CSP/servlet/ConfirmServlet';">团报名单导出</button>
+                                                    	</center></td></tr>
                                                         <tr>
                                                             <th>学号</th>
                                                             <th>姓名</th>
@@ -176,9 +190,7 @@ if(!admin.getAdminGrade().equals("0000")) {
 														Confirm confirm = list.get(i);
 													%>
                                                         <tr>
-                                                            <td>
-                                                                <input type="checkbox" name="stuID" value="<%=confirm.getStuID()%>"><%=confirm.getStuID()%>
-                                                            </td>
+                                                            <td><%=confirm.getStuID()%></td>
                                                             <td><%=confirm.getStuName()%></td>
                                                             <td><%=confirm.getIDnumber()%></td>
                                                         </tr>

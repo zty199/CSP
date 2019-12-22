@@ -12,7 +12,9 @@ admin = (Admin) session.getAttribute("user");
 <html>
 
 <head>
-    <title>importScore.html</title>
+	<base href="<%=basePath%>">
+
+    <title>CSP考试团报管理系统 | 导入成绩表</title>
 
     <meta http-equiv="pragma" content="no-cache">
 	<meta http-equiv="cache-control" content="no-cache">

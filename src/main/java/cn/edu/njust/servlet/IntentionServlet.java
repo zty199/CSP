@@ -27,7 +27,7 @@ public class IntentionServlet extends HttpServlet {
         ConfirmDao dao = new ConfirmDao();
         if(request.getParameterValues("stuid") == null) {
         	out.print("<script>");
-			out.print("alert('Please pick what you want to delete.');");
+			out.print("alert('Please pick what you want to add.');");
 			out.print("window.location.href='jsp/managerIntention.jsp'");
 			out.print("</script>");
 			out.close();	

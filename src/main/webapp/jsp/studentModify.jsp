@@ -175,14 +175,21 @@ if(identity == 1) {
 				  	  <a href="/CSP/jsp/studentModify.jsp" class="btn btn-block btn-danger">重置</a>
 					</div>
 					<div class="social-auth-links col-4 m-auto">
+					  <script type="text/javascript">
+						function exit() {
+						window.opener=null;
+						window.open("","_self");
+						window.close();
+						};
+					  </script>
 					  <%
           			  if(identity == 0) {
           			  %>
-				  	  <a href="/CSP/jsp/studentMain.jsp" class="btn btn-block btn-default">返回</a>
+				  	  <a onclick="exit()" class="btn btn-block btn-default">关闭页面</a>
 				  	  <%
 				  	  } else {
 				  	  %>
-				  	  <a href="/CSP/jsp/managerMain.jsp" class="btn btn-block btn-default">返回</a>
+				  	  <a onclick="exit()" class="btn btn-block btn-default">关闭页面</a>
 				  	  <%
 				  	  }
 				  	  %>

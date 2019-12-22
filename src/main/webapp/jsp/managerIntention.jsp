@@ -15,10 +15,12 @@ if(!admin.getAdminGrade().equals("0000")) {
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-<html style="height:98%;">
+<html>
 
 <head>
-  <title>managerlntention.html</title>
+  <base href="<%=basePath%>">
+
+  <title>CSP考试团报管理系统 | 团报意向名单</title>
 
   <meta http-equiv="pragma" content="no-cache">
   <meta http-equiv="cache-control" content="no-cache">
@@ -141,12 +143,34 @@ if(!admin.getAdminGrade().equals("0000")) {
                   <div class="col-12">
                     <div class="card mb-5">
                       <div class="card-header">
-
+                        <h3 class="card-title">团报意向名单</h3>
                       </div>
                       <!-- /.card-header -->
                       <div class="card-body table-responsive p-0" style="height: 350px;">
+                      <style>
+                      .button {
+                        background-color: #4CAF50;
+                        /* Green */
+                        border: none;
+                        color: white;
+                        padding: 15px 32px;
+                        text-align: center;
+                        text-decoration: none;
+                        display: inline-block;
+                        font-size: 16px;
+                        margin: 4px 2px;
+                        cursor: pointer;
+                      }
+                      .button3 {
+                        border-radius: 8px;
+                      }
+                      </style>
+                       <form action="servlet/IntentionServlet" method="post"> 
                         <table class="table table-head-fixed">
                           <thead>
+                          	<tr><td colspan="3"><center>
+                          	  <button type="submit" class="button button3">添加到团报名单</button>
+                          	</center></td></tr>
                             <tr>
                               <th>学号</th>
                               <th>姓名</th>
@@ -170,6 +194,7 @@ if(!admin.getAdminGrade().equals("0000")) {
                           %>
                           </tbody>
                         </table>
+                       </form>
                       </div>
                       <!-- /.card-body -->
                     </div>
