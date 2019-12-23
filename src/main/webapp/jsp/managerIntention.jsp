@@ -7,9 +7,9 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 Admin admin = new Admin();
 admin = (Admin) session.getAttribute("user");
 if(!admin.getAdminGrade().equals("0000")) {
-	JOptionPane.showMessageDialog(null, "请以系统管理员身份登录！");
+	JOptionPane.showMessageDialog(null, "您不能导出名单，请以系统管理员身份登录！");
 %>
-<jsp:forward page="login.jsp"></jsp:forward>
+<script type="text/javascript">javascript:history.back(-1);</script>
 <%
 }
 %>

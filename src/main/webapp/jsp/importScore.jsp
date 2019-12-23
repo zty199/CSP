@@ -1,4 +1,4 @@
-<%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page language="java" import="java.util.*, javax.swing.*" pageEncoding="UTF-8"%>
 <%@ page import="cn.edu.njust.bean.*, cn.edu.njust.dao.*"%>
 <jsp:include page="isAdmin.jsp"></jsp:include>
 <%
@@ -6,6 +6,12 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 Admin admin = new Admin();
 admin = (Admin) session.getAttribute("user");
+if(!admin.getAdminGrade().equals("0000")) {
+	JOptionPane.showMessageDialog(null, "您不能导入成绩，请以系统管理员身份登录！");
+%>
+<script type="text/javascript">javascript:history.back(-1);</script>
+<%
+}
 %>
 
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
@@ -126,39 +132,40 @@ admin = (Admin) session.getAttribute("user");
 
                 <section class="main-section">
                     <center>
+                      <div class="col-3">
                         <form action="servlet/ExcelTwoServlet" enctype="multipart/form-data" method="post" οnsubmit="return check_upload(this)">
                             <select name="csp">
-								<option value="" selected="selected">[选择CSP]</option>
-								<!--<option value="CSP-16">CSP-16</option>
-	    						<option value="CSP-17">CSP-17</option>
-	    						<option value="CSP-18">CSP-18</option>-->
-								<option value="CSP-19">CSP-19</option>
-								<option value="CSP-20">CSP-20</option>
-								<option value="CSP-21">CSP-21</option>
-								<option value="CSP-22">CSP-22</option>
-								<option value="CSP-23">CSP-23</option>
-								<option value="CSP-24">CSP-24</option>
-								<!--<option value="CSP-25">CSP-25</option>
-	    						<option value="CSP-26">CSP-26</option>
-	    						<option value="CSP-27">CSP-27</option>
-	    						<option value="CSP-28">CSP-28</option>
-	    						<option value="CSP-29">CSP-29</option>
-	    						<option value="CSP-30">CSP-30</option>
-	    						<option value="CSP-31">CSP-31</option>
-	    						<option value="CSP-32">CSP-32</option>
-	    						<option value="CSP-33">CSP-33</option>
-	    						<option value="CSP-34">CSP-34</option>
-	    						<option value="CSP-35">CSP-35</option>
-	    						<option value="CSP-36">CSP-36</option>
-	    						<option value="CSP-37">CSP-37</option>
-	    						<option value="CSP-38">CSP-38</option>
-	    						<option value="CSP-39">CSP-39</option>
-	    						<option value="CSP-40">CSP-40</option>
-	    						<option value="CSP-41">CSP-41</option>
-	    						<option value="CSP-42">CSP-42</option>
-	    						<option value="CSP-43">CSP-43</option>
-	    						<option value="CSP-44">CSP-44</option>
-	    						<option value="CSP-45">CSP-45</option>-->
+								<option value="" selected>[选择CSP届数]</option>
+								<!--<option value="16">CSP-16</option>
+	    						<option value="17">CSP-17</option>-->
+	    						<option value="18">CSP-18</option>
+								<option value="19">CSP-19</option>
+								<!--<option value="CSP-20">CSP-20</option>
+								<option value="21">CSP-21</option>
+								<option value="22">CSP-22</option>
+								<option value="23">CSP-23</option>
+								<option value="24">CSP-24</option>
+								<option value="25">CSP-25</option>
+	    						<option value="26">CSP-26</option>
+	    						<option value="27">CSP-27</option>
+	    						<option value="28">CSP-28</option>
+	    						<option value="29">CSP-29</option>
+	    						<option value="30">CSP-30</option>
+	    						<option value="31">CSP-31</option>
+	    						<option value="32">CSP-32</option>
+	    						<option value="33">CSP-33</option>
+	    						<option value="34">CSP-34</option>
+	    						<option value="35">CSP-35</option>
+	    						<option value="36">CSP-36</option>
+	    						<option value="37">CSP-37</option>
+	    						<option value="38">CSP-38</option>
+	    						<option value="39">CSP-39</option>
+	    						<option value="40">CSP-40</option>
+	    						<option value="41">CSP-41</option>
+	    						<option value="42">CSP-42</option>
+	    						<option value="43">CSP-43</option>
+	    						<option value="44">CSP-44</option>
+	    						<option value="45">CSP-45</option>-->
 							</select>
                             <input type="file" id="filename" name="scoreExcel"></br>
                             <!-- &nbsp;&nbsp;请选择文件路径上传学生信息表</br> -->
@@ -183,6 +190,7 @@ admin = (Admin) session.getAttribute("user");
                             </style>
                             <button class="button button3">提交</button>
                         </form>
+                      </div>
                     </center>
                 </section>
                 <a class="exit-off-canvas"></a>

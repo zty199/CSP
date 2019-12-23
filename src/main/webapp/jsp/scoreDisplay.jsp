@@ -193,34 +193,21 @@ admin = (Admin) session.getAttribute("user");
 													<table class="table table-hover">
 														<tbody>
 														<%
-														String csp = "17";
+														String csp = "18";
 														if(request.getParameter("cspnumber") != null) {
 															csp = (String) request.getParameter("cspnumber");
 														}
 														if(admin.getAdminGrade().equals("0000")) {
-															String[] grade = new String[4];
-															if(request.getParameterValues("grade") == null) {
-																grade[0] = "2016";
-																grade[1] = "2017";
-																grade[2] = "2018";
-																grade[3] = "2019";
-															} else {
-																grade = request.getParameterValues("grade");
-															}
 														%>
 															<tr>
 																<td><input type="checkbox" name="allgrade" value="0000" id="checkall">&nbsp;All</td>
-																<td><input type="checkbox" name="grade" value="2016">2016&nbsp;</td>
-																<td><input type="checkbox" name="grade" value="2017">2017&nbsp;</td>
 																<td><input type="checkbox" name="grade" value="2018">2018&nbsp;</td>
 																<td><input type="checkbox" name="grade" value="2019">2019&nbsp;</td>
 																<td colspan="2">
 																	<select class="select" name="cspnumber">
 																		<option value="<%=csp%>" selected>CSP-<%=csp%></option>
-																		<option value="17">CSP-17</option>
 																		<option value="18">CSP-18</option>
 																		<option value="19">CSP-19</option>
-																		<option value="20">CSP-20</option>
 																	</select>
 																</td>
 																<td colspan="2">
@@ -237,10 +224,8 @@ admin = (Admin) session.getAttribute("user");
 																<td colspan="2">
 																	<select class="select" name="cspnumber">
 																		<option value="<%=csp%>" selected>CSP-<%=csp%></option>
-																		<option value="17">CSP-17</option>
 																		<option value="18">CSP-18</option>
 																		<option value="19">CSP-19</option>
-																		<option value="20">CSP-20</option>
 																	</select>
 																</td>
 																<td colspan="2">
@@ -277,26 +262,16 @@ admin = (Admin) session.getAttribute("user");
 													</thead>
 													<tbody>
 													<%
-													if(admin.getAdminGrade().equals("0000")) {
-														String[] grade = new String[4];
-														if(request.getParameterValues("grade") == null) {
-															grade[0] = "2016";
-															grade[1] = "2017";
-															grade[2] = "2018";
-															grade[3] = "2019";
-														} else {
-															grade = request.getParameterValues("grade");
-														}
-														AdminDao dao1 = new AdminDao();
-														ScoreDao dao2 = new ScoreDao();
-														List<Student> list1 = new ArrayList<Student>();
-														List<Score> list2 = new ArrayList<Score>();
-														for(int i = 0; i < grade.length; i++) {
-															list1 = dao1.getGradeStudent(grade[i]);
-															for(int j = 0; j < list1.size(); j++) {
-																list2 = dao2.getAllScore(list1.get(j).getStuID(), csp);
-																for(int k = 0; k < list2.size(); k++) {
-																	Score score = list2.get(k);
+													String grade = admin.getAdminGrade();
+													AdminDao dao1 = new AdminDao();
+													ScoreDao dao2 = new ScoreDao();
+													List<Student> list1 = new ArrayList<Student>();
+													List<Score> list2 = new ArrayList<Score>();
+													list1 = dao1.getGradeStudent(grade);
+													for(int i = 0; i < list1.size(); i++) {
+														list2 = dao2.getAllScore(list1.get(i).getStuID(), csp);
+														for(int j = 0; j < list2.size(); j++) {
+															Score score = list2.get(j);
 													%>
 														<tr>
 															<td><%=score.getStuID()%></td>
@@ -310,34 +285,6 @@ admin = (Admin) session.getAttribute("user");
 															<td><%=score.getScore_5()%></td>
 														</tr>
 													<%
-																}
-															}
-														}
-													} else {
-														String grade = admin.getAdminGrade();
-														AdminDao dao1 = new AdminDao();
-														ScoreDao dao2 = new ScoreDao();
-														List<Student> list1 = new ArrayList<Student>();
-														List<Score> list2 = new ArrayList<Score>();
-														list1 = dao1.getGradeStudent(grade);
-														for(int i = 0; i < list1.size(); i++) {
-															list2 = dao2.getAllScore(list1.get(i).getStuID(), csp);
-															for(int j = 0; j < list2.size(); j++) {
-																Score score = list2.get(j);
-													%>
-														<tr>
-															<td><%=score.getStuID()%></td>
-															<td><%=score.getStuName()%></td>
-															<td><%=score.getSession()%></td>
-															<td><%=score.getTotal_score()%></td>
-															<td><%=score.getScore_1()%></td>
-															<td><%=score.getScore_2()%></td>
-															<td><%=score.getScore_3()%></td>
-															<td><%=score.getScore_4()%></td>
-															<td><%=score.getScore_5()%></td>
-														</tr>
-													<%
-															}
 														}
 													}
 													%>

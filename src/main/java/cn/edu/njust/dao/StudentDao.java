@@ -64,14 +64,14 @@ public class StudentDao {
     }
 	
 	public String getStuID(String IDnumber) throws SQLException {
-		String sql = "select * from stu_overview where IDNumber = '" + IDnumber + "'";
+		String sql = "select * from stu_overview where IDnumber = '" + IDnumber + "'";
         Connection conn = DbUtil.getCon();
         String stuID = "NO";
         try {
         	PreparedStatement pst = conn.prepareStatement(sql);
         	ResultSet rs = pst.executeQuery();
         	while(rs.next()) {
-        		stuID = rs.getString("StuID");
+        		stuID = rs.getString("stuID");
         	}
         	rs.close();
         	pst.close();

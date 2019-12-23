@@ -159,27 +159,21 @@ admin = (Admin) session.getAttribute("user");
                                                     <%
                                     				String grade = admin.getAdminGrade();
                                     				AdminDao dao = new AdminDao();
-                                   					List<Student> list=dao.getGradeStudent(grade);
+                                   					List<Student> list = dao.getGradeStudent(grade);
                                     				for(int i = 0; i < list.size(); i++) {
                                         				Student student = new Student();
                                         				student = list.get(i);
-                                    				%>
-                                                        <tr>
-                                                            <td>
-                                                                <%=student.getStuID()%>
-                                                            </td>
-                                                            <td>
-                                                                <%=student.getStuName() %>
-                                                            </td>
-                                                            <td>
-                                                                <%=student.getStuGrade() %>
-                                                            </td>
+                                        			%>
+                                        				<tr>
+                                                            <td><%=student.getStuID()%></td>
+                                                            <td><%=student.getStuName() %></td>
+                                                            <td><%=student.getStuGrade() %></td>
                                                             <td>
                                                                 <a href="/CSP/jsp/studentModify.jsp?stuID=<%=student.getStuID()%>" target="_blank">修改信息</a>
                                                             </td>
                                                         </tr>
-                                                    <%
-                                    				}
+                                  					<%
+                                  					}
                                   					%>
                                                     </tbody>
                                                 </table>

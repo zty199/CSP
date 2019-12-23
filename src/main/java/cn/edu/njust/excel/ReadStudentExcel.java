@@ -45,7 +45,7 @@ public class ReadStudentExcel {
             System.out.println(hssfSheet.getLastRowNum());
             for (int rowNum = 1; rowNum < hssfSheet.getLastRowNum(); rowNum++) {
                 HSSFRow hssfRow = hssfSheet.getRow(rowNum);
-                if (hssfRow != null) {
+                if (hssfRow != null && getValue(hssfRow.getCell(0)) != "") {
                     student = new Student();
                     HSSFCell stuID = hssfRow.getCell(1);
                     HSSFCell name = hssfRow.getCell(2);

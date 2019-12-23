@@ -1,6 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <%@ page import="cn.edu.njust.bean.Admin, cn.edu.njust.dao.*"%>
-<<jsp:include page="isAdmin.jsp"></jsp:include>
+<jsp:include page="isAdmin.jsp"></jsp:include>
 <%
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
@@ -21,7 +21,7 @@ admin = (Admin) session.getAttribute("user");
 	<meta http-equiv="keywords" content="keyword1,keyword2,keyword3">
 	<meta http-equiv="description" content="This is my page">
 	<meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
-	<meta http-equiv="refresh" content="5;URL=http://localhost/CSP/jsp/managerMain.jsp">
+	<meta http-equiv="refresh" content="5;URL=/CSP/jsp/managerMain.jsp">
 	<!--
 	<link rel="stylesheet" type="text/css" href="styles.css">
 	-->
@@ -29,6 +29,6 @@ admin = (Admin) session.getAttribute("user");
   </head>
   <body>
     <p>5秒后返回管理员主页面
-    <center>上传<%=session.getAttribute("message") %></center>
+    <center>上传<%=session.getAttribute("message")%></center>
   </body>
 </html>
