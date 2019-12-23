@@ -174,7 +174,17 @@ if(!admin.getAdminGrade().equals("0000")) {
                       									}
                       									</style>
                       									<tr><td colspan="3"><center>
+                      									<%
+                      									if(application.getAttribute("open") == null || (int)application.getAttribute("open") == 0) {
+                      									%>
                                                 			<button type="button" class="button button3" onclick="window.location.href='/CSP/servlet/ConfirmServlet';">团报名单导出</button>
+                                                		<%
+                      									} else {
+                      									%>
+                      										<button type="button" class="button button3" onclick="window.location.href='/CSP/servlet/ConfirmServlet';" disabled>团报名单导出</button>
+                      									<%
+                      									}
+                                                		%>
                                                     	</center></td></tr>
                                                         <tr>
                                                             <th>学号</th>

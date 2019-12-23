@@ -71,15 +71,16 @@ public class CalculateServlet extends HttpServlet {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-        	if(j != list1.size()) {
-        		response.sendRedirect("../jsp/managerOpen.jsp");
-        	} else {
-        		sc.setAttribute("num", num);
-        		JOptionPane.showMessageDialog(null, "数据更新成功！符合条件人数： " + num);
-        		response.sendRedirect("../jsp/managerOpen.jsp");
-        		return;
-        	}
         }
+        if(i != list.size()) {
+    		response.sendRedirect("../jsp/managerOpen.jsp");
+    		return;
+    	} else {
+    		sc.setAttribute("num", num);
+    		JOptionPane.showMessageDialog(null, "数据更新成功！符合条件人数： " + num);
+    		response.sendRedirect("../jsp/managerOpen.jsp");
+    		return;
+    	}
 	}
 
 }

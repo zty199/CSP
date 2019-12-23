@@ -95,15 +95,15 @@ admin = (Admin) session.getAttribute("user");
 		  <td>2017<input type="checkbox" name="grade" value="2017"></td>
 		  <td>2018<input type="checkbox" name="grade" value="2018"></td>
 		  <td>2019<input type="checkbox" name="grade" value="2019"></td>
-		  <!-- <td>CSP届数
+		  <td>CSP届数
 			<select name="cspnumber">
-			  <option value="CSP-17">CSP-17</option>
-			  <option value="CSP-18">CSP-18</option>
-			  <option value="CSP-19">CSP-19</option>
-			  <option value="CSP-20">CSP-20</option>
-			  <option value="CSP-21">CSP-21</option>
+			  <option value="17">CSP-17</option>
+			  <option value="18">CSP-18</option>
+			  <option value="19">CSP-19</option>
+			  <option value="20">CSP-20</option>
+			  <option value="21">CSP-21</option>
             </select>
-		  </td> -->
+		  </td>
 		  <td><input type="submit" value="refresh"></td>
 		</tr>
 		<tr>

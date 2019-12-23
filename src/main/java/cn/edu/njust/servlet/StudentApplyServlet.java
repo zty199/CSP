@@ -68,25 +68,18 @@ public class StudentApplyServlet extends HttpServlet {
 				}
         	} else {
         		if(student.getPubFree() == true) {
-        			student.setPubFree(false);
         			StudentDao dao = new StudentDao();
         			try {
-        				if(dao.updateQuality(student)) {
-        					IntentionDao dao1 = new IntentionDao();
-        					dao1.addIntention(student.getStuID());
-        					if(dao1.addIntention(student.getStuID())) {
-        						JOptionPane.showMessageDialog(null, "团报成功，您需要参加选拔考试！");
-        		            	response.sendRedirect("../jsp/studentMain.jsp");
-        		            	return;
-        					} else {
-        						JOptionPane.showMessageDialog(null, "未知原因，考核名单添加失败！请联系管理员！");
-            					response.sendRedirect("../jsp/studentApply.jsp");
-            					return;
-        					}
+        				IntentionDao dao1 = new IntentionDao();
+        				dao1.addIntention(student.getStuID());
+        				if(dao1.addIntention(student.getStuID())) {
+        					JOptionPane.showMessageDialog(null, "团报成功，您需要参加选拔考试！");
+        		            response.sendRedirect("../jsp/studentMain.jsp");
+        		            return;
         				} else {
-        					JOptionPane.showMessageDialog(null, "未知原因，用户数据更新失败！");
-        					response.sendRedirect("../jsp/studentApply.jsp");
-        					return;
+        					JOptionPane.showMessageDialog(null, "未知原因，考核名单添加失败！请联系管理员！");
+            				response.sendRedirect("../jsp/studentApply.jsp");
+            				return;
         				}
 					} catch (SQLException e) {
 						// TODO Auto-generated catch block
