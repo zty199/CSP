@@ -100,6 +100,11 @@ admin = (Admin) session.getAttribute("user");
 
                 <aside class="left-off-canvas-menu" style="background-color: #68838b;height: 98%;">
                     <ul class="off-canvas-list test" style="height: 98%;">
+                    	<li><a href="/CSP/jsp/scoreDisplay.jsp"><i class="fi-text-color"
+									style="font-size:20px;color:white;"></i>
+								<p style="color:white">查询成绩</p>
+			  				</a></li>
+            			<li class="divider"></li>
                         <li><a href="/CSP/jsp/importScore.jsp"><i class="fi-text-color"
 									style="font-size:20px;color:white;"></i>
 								<p style="color:white">导入成绩</p>
