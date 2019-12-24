@@ -25,6 +25,9 @@ public class IntentionDao {
              	intention.setIntention(rs.getInt("intention"));
                 list.add(intention);
              }
+             rs.close();
+             pst.close();
+             conn.close();
          } catch (SQLException e) {
              e.printStackTrace();
          }
@@ -46,6 +49,9 @@ public class IntentionDao {
 	    		intention.setIntention(rs.getInt("intention"));
 	    		list.add(intention);
 	    	}
+	    	rs.close();
+            pst.close();
+            conn.close();
 	    } catch (SQLException e) {
 	    	e.printStackTrace();
 	    }
@@ -64,6 +70,9 @@ public class IntentionDao {
              	intention.setName(rs.getString("name"));
              	intention.setIntention(rs.getInt("intention"));
         	}
+        	rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
         	e.printStackTrace();
         }
@@ -82,6 +91,7 @@ public class IntentionDao {
     		}
     		rs.close();
     		pst.close();
+    		conn.close();
     	} catch (SQLException e) {
     		e.printStackTrace();
     	}
@@ -99,9 +109,11 @@ public class IntentionDao {
     		pst.setString(1, name);
     		int flag = pst.executeUpdate();
     		pst.close();
+    		conn.close();
     		return flag > 0 ? true : false;
     	} catch (SQLException e) {
     		e.printStackTrace();
+    		conn.close();
     		return false;
     	}
 	}
@@ -114,29 +126,31 @@ public class IntentionDao {
     		PreparedStatement pst = conn.prepareStatement(sql);
     		int flag = pst.executeUpdate();
     		pst.close();
+    		conn.close();
     		return flag > 0 ? true : false;
     	} catch (SQLException e) {
     		e.printStackTrace();
+    		conn.close();
     		return false;
     	}
     }
 	
 	//通过学号添加Intention表
-	public boolean addIntention(String stuid) throws SQLException {
+	public boolean addIntention(Student student) throws SQLException {
 		String sql = "insert into intention_list(stuID, name, intention) values (?, ?, ?)";
 		Connection conn = DbUtil.getCon();
 		try {
-		    StudentDao dao = new StudentDao();
-		    Student stu = dao.getInfo(stuid);
 		    PreparedStatement pst = conn.prepareStatement(sql);
-		    pst.setString(1, stu.getStuID());
-		    pst.setString(2, stu.getStuName());
-		    pst.setString(3, stu.getStuPersonID());
+		    pst.setString(1, student.getStuID());
+		    pst.setString(2, student.getStuName());
+		    pst.setBoolean(3, false);
 		    int flag = pst.executeUpdate();
 		    pst.close();
+		    conn.close();
 		    return flag > 0 ? true : false;
 		} catch (SQLException e) {
 			e.printStackTrace();
+			conn.close();
 			return false;
 		}
 	}

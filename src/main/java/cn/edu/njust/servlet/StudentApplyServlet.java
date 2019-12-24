@@ -68,11 +68,9 @@ public class StudentApplyServlet extends HttpServlet {
 				}
         	} else {
         		if(student.getPubFree() == true) {
-        			StudentDao dao = new StudentDao();
         			try {
-        				IntentionDao dao1 = new IntentionDao();
-        				dao1.addIntention(student.getStuID());
-        				if(dao1.addIntention(student.getStuID())) {
+        				IntentionDao dao = new IntentionDao();
+        				if(dao.addIntention(student)) {
         					JOptionPane.showMessageDialog(null, "团报成功，您需要参加选拔考试！");
         		            response.sendRedirect("../jsp/studentMain.jsp");
         		            return;

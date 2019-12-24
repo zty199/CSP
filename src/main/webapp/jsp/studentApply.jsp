@@ -112,7 +112,7 @@ if(sc.getAttribute("open") == null || sc.getAttribute("open").equals(0)) {
         			List<Intention> list = new ArrayList<Intention>();
         			list = dao.getAllIntention();
         			for(int i = 1; i <= list.size(); i++) {
-        				Intention intention = new Intention();
+        				Intention intention = list.get(i - 1);
         			%>
 		              <tr>
 		                <td><%=i%></td>

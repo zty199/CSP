@@ -55,7 +55,17 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                 	<p class="login-box-msg">登陆以进行相关操作</p>
                 	<form action="servlet/LoginServlet" method="post">
                   	<div class="input-group mb-3">
+                  	<%
+                  	if(request.getParameter("userid") == null) {
+                  	%>
                       <input type="text" name="userid" class="form-control" placeholder="请输入学号/工号">
+                    <%
+                    } else {
+                    %>
+                      <input type="text" name="userid" class="form-control" placeholder="请输入学号/工号" value="<%=request.getParameter("userid")%>">
+                    <%
+                    }
+                    %>
                       <div class="input-group-append">
                       	<div class="input-group-text">
                           <span class="fas fa-user"></span>
@@ -70,7 +80,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
                         </div>
                       </div>
                     </div>
-            		<div class="row ">
+            		<div class="row">
             		  <div class="col-1"></div>
             			<div class="custom-control custom-radio col-6">
             			  <input class="custom-control-input" type="radio" id="customRadio1" name="identity" value="0" checked>
@@ -81,13 +91,7 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
             			  <label for="customRadio2" class="custom-control-label">我是管理员</label>
             			</div>
             		  </div>
-                      <div class="row m-3 text-center">
-                        <div class="icheck-primary text-center">
-                          <input type="checkbox" id="remember">
-                          <label for="remember">记住密码</label>
-                        </div>
-                        <!-- /.col -->
-                  	  </div>
+            		  <br>
             		  <div class="row m-3">
             			<div class="col-4 m-auto">
             			  <button type="submit" class="btn btn-purple btn-block">登陆</button>

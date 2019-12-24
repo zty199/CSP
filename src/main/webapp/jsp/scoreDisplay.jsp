@@ -197,29 +197,20 @@ admin = (Admin) session.getAttribute("user");
 														if(request.getParameter("cspnumber") != null) {
 															csp = (String) request.getParameter("cspnumber");
 														}
-														if(admin.getAdminGrade().equals("0000")) {
-														%>
-															<tr>
-																<td><input type="checkbox" name="allgrade" value="0000" id="checkall">&nbsp;All</td>
-																<td><input type="checkbox" name="grade" value="2018">2018&nbsp;</td>
-																<td><input type="checkbox" name="grade" value="2019">2019&nbsp;</td>
-																<td colspan="2">
-																	<select class="select" name="cspnumber">
-																		<option value="<%=csp%>" selected>CSP-<%=csp%></option>
-																		<option value="18">CSP-18</option>
-																		<option value="19">CSP-19</option>
-																	</select>
-																</td>
-																<td colspan="2">
-																	<button type="submit" class="btn btn-block btn-primary btn-sm">刷新</button>
-																</td>
-															</tr>
-														<%
-														} else {
 														%>
 															<tr>
 																<td colspan="5"><center>
-																	<input type="text" name="grade" value="<%=admin.getAdminGrade()%>级学生成绩表" onfocus="this.blur()">
+																<%
+																if(admin.getAdminGrade().equals("0000")) {
+																%>
+																	<input type="text" name="grade" value="<%=admin.getAdminGrade()%>级学生成绩表" style="text-align:center" onfocus="this.blur()">
+																<%
+																} else {
+																%>
+																	<input type="text" name="grade" value="全体学生成绩表" style="text-align:center" onfocus="this.blur()">
+																<%
+																}
+																%>
 																</center></td>
 																<td colspan="2">
 																	<select class="select" name="cspnumber">
@@ -232,9 +223,6 @@ admin = (Admin) session.getAttribute("user");
 																	<button type="submit" class="btn btn-block btn-primary btn-sm">刷新</button>
 																</td>
 															</tr>
-														<%
-														}
-														%>
 														</tbody>
 													</table>
 												</div>

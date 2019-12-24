@@ -32,6 +32,9 @@ public class StudentDao {
         		student.setScoreNum(rs.getInt("score_qual"));
                 list.add(student);
             }
+            rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -57,6 +60,7 @@ public class StudentDao {
         	}
         	rs.close();
         	pst.close();
+        	conn.close();
         } catch (SQLException e) {
     		e.printStackTrace();
     	}
@@ -75,6 +79,7 @@ public class StudentDao {
         	}
         	rs.close();
         	pst.close();
+        	conn.close();
         } catch (SQLException e) {
     		e.printStackTrace();
     	}
@@ -93,6 +98,7 @@ public class StudentDao {
     		}
     		rs.close();
     		pst.close();
+    		conn.close();
     	} catch (SQLException e) {
     		e.printStackTrace();
     	}
@@ -115,6 +121,7 @@ public class StudentDao {
     		}
     		rs.close();
     		pst.close();
+    		conn.close();
     	} catch (SQLException e) {
     		e.printStackTrace();
     	}
@@ -139,9 +146,11 @@ public class StudentDao {
     		pst.setInt(8, student.getScoreNum());
     		int flag = pst.executeUpdate();
     		pst.close();
+    		conn.close();
     		return flag > 0 ? true : false;
     	} catch (SQLException e) {
     		e.printStackTrace();
+    		conn.close();
     		return false;
     	}
     }
@@ -159,9 +168,11 @@ public class StudentDao {
     		pst.setString(6, student.getStuID());
     		int flag = pst.executeUpdate();
     		pst.close();
+    		conn.close();
     		return flag > 0 ? true : false;
     	} catch (SQLException e) {
     		e.printStackTrace();
+    		conn.close();
     		return false;
     	}
     }
@@ -173,9 +184,11 @@ public class StudentDao {
     		PreparedStatement pst = conn.prepareStatement(sql);
     		int flag = pst.executeUpdate();
     		pst.close();
+    		conn.close();
     		return flag > 0 ? true : false;
     	} catch (SQLException e) {
     		e.printStackTrace();
+    		conn.close();
     		return false;
     	}
     }
@@ -191,9 +204,11 @@ public class StudentDao {
     		pst.setString(4, student.getStuID());
     		int flag = pst.executeUpdate();
     		pst.close();
+    		conn.close();
     		return flag > 0 ? true : false;
     	} catch (SQLException e) {
     		e.printStackTrace();
+    		conn.close();
     		return false;
     	}
     }

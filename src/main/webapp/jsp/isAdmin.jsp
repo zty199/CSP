@@ -5,6 +5,7 @@ String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 if(session.getAttribute("identity") == null) {
 	JOptionPane.showMessageDialog(null, "请先登录！");
+	session.invalidate();
 %>
 <jsp:forward page="login.jsp"></jsp:forward>
 <%

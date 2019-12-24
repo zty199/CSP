@@ -26,37 +26,39 @@ public class IntentionServlet extends HttpServlet {
         request.setCharacterEncoding("utf-8");
         PrintWriter out = response.getWriter();
         ConfirmDao dao = new ConfirmDao();
-        if(request.getParameterValues("stuid") == null) {
+        if(request.getParameterValues("stuID") == null) {
         	out.print("<script>");
-			out.print("alert('Please pick what you want to add.');");
-			out.print("window.location.href='jsp/managerIntention.jsp'");
+			out.print("alert('Please check what you want to add to ConfirmList.');");
+			out.print("window.location.href='/CSP/jsp/managerIntention.jsp'");
 			out.print("</script>");
-			out.close();	
+			out.close();
         } else {
         	String stuid[] = request.getParameterValues("stuID");
-        	for(int i = 0; i < stuid.length; i++) {
+        	int i;
+        	for(i = 0; i < stuid.length; i++) {
         		try {
-        			if(!dao.inConfirm(stuid[i]) && dao.addConfirm(stuid[i])) {
+        			if(!dao.isListed(stuid[i]) && dao.addConfirm(stuid[i])) {
         				StudentDao dao1 = new StudentDao();
         				Student student = dao1.getInfo(stuid[i]);
         				student.setPubFree(false);
-        				if(dao1.updateQuality(student)) {
-        					JOptionPane.showMessageDialog(null, "添加成功！");
-            			    response.sendRedirect("../jsp/managerIntention.jsp");
-            			    return;
-        				} else {
-        					JOptionPane.showMessageDialog(null, "未知原因，数据更新失败！");
-            			    response.sendRedirect("../jsp/managerIntention.jsp");
-            			    return;
+        				if(!dao1.updateQuality(student)) {
+            			    break;
         				}
         			} else {
-        				JOptionPane.showMessageDialog(null, "未知原因，添加失败！");
-        			    response.sendRedirect("../jsp/managerIntention.jsp");
-        			    return;
+        			    break;
         			}
         		} catch (SQLException e) {
         			e.printStackTrace();
         		}
+        	}
+        	if(i == stuid.length) {
+        		JOptionPane.showMessageDialog(null, "添加成功！");
+    			response.sendRedirect("../jsp/managerIntention.jsp");
+    		    return;
+        	} else {
+				JOptionPane.showMessageDialog(null, "未知原因，添加失败！");
+			    response.sendRedirect("../jsp/managerIntention.jsp");
+        		return;
         	}
         }
 	}

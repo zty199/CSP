@@ -27,9 +27,12 @@ public class AdminDao {
             	admin.setAdminGrade(rs.getString("grade"));
                 list.add(admin);
             }
+            rs.close();
+        	pst.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        conn.close();
         return list;
     }
 
@@ -50,6 +53,7 @@ public class AdminDao {
         } catch (SQLException e) {
     		e.printStackTrace();
     	}
+        conn.close();
         return admin;
     }
 	
@@ -68,6 +72,7 @@ public class AdminDao {
     	} catch (SQLException e) {
     		e.printStackTrace();
     	}
+    	conn.close();
     	if(admin.getAdminID() != null && admin.getAdminID().equals(adminID))
     		return true;
     	else
@@ -90,13 +95,14 @@ public class AdminDao {
     	} catch (SQLException e) {
     		e.printStackTrace();
     	}
+    	conn.close();
     	if(admin.getAdminID() != null && admin.getAdminID().equals(adminID) && admin.getAdminPassword().equals(adminPassword))
     		return true;
     	else
     		return false;
 	}
 	
-	public boolean addAdmin(Admin admin) throws SQLException {
+	/*public boolean addAdmin(Admin admin) throws SQLException {
     	String sql = "insert into manager(jobID, password, grade) values (?, ?, ?)";
     	Connection conn = DbUtil.getCon();
     	try {			
@@ -106,14 +112,16 @@ public class AdminDao {
     		pst.setString(3, admin.getAdminGrade());
     		int flag = pst.executeUpdate();
     		pst.close();
+    		conn.close();
     		return flag > 0 ? true : false;
     	} catch (SQLException e) {
     		e.printStackTrace();
+    		conn.close();
     		return false;
     	}
     }
 	
-	/*public boolean modifyAdmin(Admin admin, String temp) throws SQLException {
+	public boolean modifyAdmin(Admin admin, String temp) throws SQLException {
     	String sql = "update manager set jobID = ?, password = ?, grade = ? where jobID = ?";
     	Connection conn = DbUtil.getCon();
     	try {			
@@ -124,9 +132,11 @@ public class AdminDao {
     		pst.setString(4, temp);
     		int flag = pst.executeUpdate();
     		pst.close();
+    		conn.close();
     		return flag > 0 ? true : false;
     	} catch (SQLException e) {
     		e.printStackTrace();
+    		conn.close();
     		return false;
     	}
     }
@@ -138,52 +148,57 @@ public class AdminDao {
     		PreparedStatement pst = conn.prepareStatement(sql);
     		int flag = pst.executeUpdate();
     		pst.close();
+    		conn.close();
     		return flag > 0 ? true : false;
     	} catch (SQLException e) {
     		e.printStackTrace();
+    		conn.close();
     		return false;
     	}
     }*/
 	
 	public List<Student> getGradeStudent(String grade) throws SQLException {
 		List<Student> list = new ArrayList<Student>();
+		Connection conn = DbUtil.getCon();
 		if(grade.equals("0000")) {
-			String sql = "select stuID, name, grade from stu_overview";
-	    	Connection conn = DbUtil.getCon();   
+			String sql = "select stuID, name, grade from stu_overview";  
 	        try {
-	             PreparedStatement pst = conn.prepareStatement(sql);
-	             ResultSet rs = pst.executeQuery();
-	             while(rs.next())
-	             {
-	             	Student student = new Student();
-	             	student.setStuID(rs.getString("stuID"));
-	             	student.setStuName(rs.getString("name"));
-	             	student.setStuGrade(rs.getString("grade"));
-	                list.add(student);
-	             }
-	         } catch (SQLException e) {
-	             e.printStackTrace();
-	         }
-	         return list;
+	            PreparedStatement pst = conn.prepareStatement(sql);
+	            ResultSet rs = pst.executeQuery();
+	            while(rs.next())
+	            {
+	            	Student student = new Student();
+	            	student.setStuID(rs.getString("stuID"));
+	            	student.setStuName(rs.getString("name"));
+	            	student.setStuGrade(rs.getString("grade"));
+	            	list.add(student);
+	            }
+	            rs.close();
+	            pst.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
 		} else {
 			String sql = "select stuID, name, grade from stu_overview where grade = '" + grade + "'";
-	    	Connection conn = DbUtil.getCon();   
 	        try {
-	             PreparedStatement pst = conn.prepareStatement(sql);
-	             ResultSet rs = pst.executeQuery();
-	             while(rs.next())
-	             {
-	             	Student student = new Student();
-	             	student.setStuID(rs.getString("stuID"));
-	             	student.setStuName(rs.getString("name"));
-	             	student.setStuGrade(grade);
-	                list.add(student);
-	             }
-	         } catch (SQLException e) {
-	             e.printStackTrace();
-	         }
-	         return list;
+	            PreparedStatement pst = conn.prepareStatement(sql);
+	            ResultSet rs = pst.executeQuery();
+	            while(rs.next())
+	            {
+	            	Student student = new Student();
+	            	student.setStuID(rs.getString("stuID"));
+	            	student.setStuName(rs.getString("name"));
+	            	student.setStuGrade(grade);
+	            	list.add(student);
+	            }
+	            rs.close();
+	         	pst.close();
+	        } catch (SQLException e) {
+	            e.printStackTrace();
+	        }
 		}
+        conn.close();
+        return list;
 	}
 
 }

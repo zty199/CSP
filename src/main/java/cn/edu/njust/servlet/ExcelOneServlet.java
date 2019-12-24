@@ -11,7 +11,8 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
- 
+import javax.swing.JOptionPane;
+
 import org.apache.commons.fileupload.FileItem;
 import org.apache.commons.fileupload.FileUploadBase;
 import org.apache.commons.fileupload.disk.DiskFileItemFactory;
@@ -88,7 +89,7 @@ public class ExcelOneServlet extends HttpServlet {
                     grade = value;
 //                    String value = item.getString("gbk");
                     //value = new String(value.getBytes("iso8859-1"),"UTF-8");
-                    System.out.println(name + "=" + value);
+                    //System.out.println(name + "=" + value);
                 }else{//如果fileitem中封装的是上传文件
                     //得到上传的文件名称，
                     String filename = item.getName();
@@ -142,9 +143,9 @@ public class ExcelOneServlet extends HttpServlet {
                     
                     SaveStudent saveData2DB = new SaveStudent();
                     saveData2DB.save(realSavePath + "\\" + saveFilename, grade);
-                    System.out.println("end");
+                    //System.out.println("end");
                     
-                    message = "success";
+                    message = "文件上传成功！";
                 }
             }
         }catch (FileUploadBase.FileSizeLimitExceededException e) {
@@ -163,10 +164,12 @@ public class ExcelOneServlet extends HttpServlet {
             message= "文件上传失败！";
             e.printStackTrace();
         }
-        request.getSession().setAttribute("message",message);
+        //request.getSession().setAttribute("message",message);
         /*returnResultJson(response,message);*/
         //request.getRequestDispatcher("/importStudent.jsp").forward(request, response);
-        response.sendRedirect("../jsp/success.jsp");
+        //response.sendRedirect("../jsp/success.jsp");
+        JOptionPane.showMessageDialog(null, message + "\n点击返回主页");
+        response.sendRedirect("../jsp/managerMain.jsp");
 	}
 
 	private String makeFileName(String filename){  //2.jpg

@@ -186,10 +186,24 @@ if(!admin.getAdminGrade().equals("0000")) {
                           IntentionDao dao = new IntentionDao();
                           List<Intention> list = dao.getAllIntention();
                           for(int i = 0; i < list.size(); i++) {
-                          Intention intention = list.get(i);
+                          	  Intention intention = list.get(i);
                           %>
                             <tr>
-                              <td><input type="checkbox" name="stuID" value="<%=intention.getStuID()%>"><%=intention.getStuID()%></td>
+                              <td>
+                              <%
+                              ConfirmDao dao1 = new ConfirmDao();
+                              if(dao1.isListed(intention.getStuID())) {
+                              %>
+                                <input type="checkbox" name="stuID" value="<%=intention.getStuID()%>" checked disabled>
+                              <%
+                              } else {
+                              %>
+                              	<input type="checkbox" name="stuID" value="<%=intention.getStuID()%>">
+                              <%
+                              }
+                              %>
+                                <%=intention.getStuID()%>
+                              </td>
                               <td><%=intention.getName()%></td>
                               <td><%=intention.getIntention()%></td>
                             </tr>

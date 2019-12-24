@@ -2,6 +2,7 @@ package cn.edu.njust.excel;
 
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
  
@@ -15,14 +16,14 @@ import cn.edu.njust.bean.*;
 
 public class ReadStudentExcel {
 	
-	List<Student> list1 = new ArrayList<Student>();
+	private List<Student> list = new ArrayList<Student>();
 	
-	public List<Student> getList1() {
-		return list1;
+	public List<Student> getList() {
+		return list;
 	}
 
-	public void setList1(List<Student> list1) {
-		this.list1 = list1;
+	public void setList(List<Student> list) {
+		this.list = list;
 	}
 	/*
 	 * inout: .xls文件路径
@@ -30,11 +31,10 @@ public class ReadStudentExcel {
 	 * 
 	 */
 	public void readXls(String path, String grade) throws IOException {
-        FileInputStream is = new FileInputStream(path);
+        InputStream is = new FileInputStream(path);
         @SuppressWarnings("resource")
 		HSSFWorkbook hssfWorkbook = new HSSFWorkbook(is);
-        Student student = null;
-        System.out.println("read...");
+        System.out.println("Reading...");
         // 循环工作表Sheet
         for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); numSheet++) {
             HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
@@ -46,14 +46,13 @@ public class ReadStudentExcel {
             for (int rowNum = 1; rowNum < hssfSheet.getLastRowNum(); rowNum++) {
                 HSSFRow hssfRow = hssfSheet.getRow(rowNum);
                 if (hssfRow != null && getValue(hssfRow.getCell(0)) != "") {
-                    student = new Student();
+                    Student student = new Student();
                     HSSFCell stuID = hssfRow.getCell(1);
                     HSSFCell name = hssfRow.getCell(2);
                     HSSFCell IDnum = hssfRow.getCell(3);
                     String stuid = getValue(stuID);
                     String stuname = getValue(name);
                     String idnum = getValue(IDnum);
-                    System.out.println(grade);
                     student.setStuID(stuid);
                     student.setStuName(stuname);
                     student.setStuPassword(stuid);
@@ -62,23 +61,19 @@ public class ReadStudentExcel {
                     student.setPubFree(true);
                     student.setScoreNum(0);
                     student.setUsedNum(0);
-                    list1.add(student);
+                    list.add(student);
                 }
             }
         }
-        //return list;
     }
     
     private String getValue(HSSFCell hssfCell) {
-    	if (hssfCell.getCellType() == CellType.BOOLEAN) {
-    		// 返回布尔类型的值
-    		return String.valueOf(hssfCell.getBooleanCellValue());
-    	} else if (hssfCell.getCellType() == CellType.NUMERIC) {
+    	if (hssfCell.getCellType() == CellType.NUMERIC) {
     		// 返回数值类型的值
     		return String.valueOf(hssfCell.getNumericCellValue());
     	} else {
     		// 返回字符串类型的值
-    		return String.valueOf(hssfCell.getStringCellValue());
+    		return hssfCell.getStringCellValue();
     	}
     }
 

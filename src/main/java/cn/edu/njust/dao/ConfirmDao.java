@@ -25,6 +25,9 @@ public class ConfirmDao {
              	confirm.setIDnumber(rs.getString("IDnumber"));
                 list.add(confirm);
              }
+             rs.close();
+             pst.close();
+             conn.close();
          } catch (SQLException e) {
              e.printStackTrace();
          }
@@ -45,6 +48,9 @@ public class ConfirmDao {
              	confirm.setIDnumber(rs.getString("IDnumber"));
                 list.add(confirm);
              }
+             rs.close();
+             pst.close();
+             conn.close();
          } catch (SQLException e) {
              e.printStackTrace();
          }
@@ -63,6 +69,9 @@ public class ConfirmDao {
              	confirm.setStuName(rs.getString("name"));
              	confirm.setIDnumber(rs.getString("IDnumber"));
         	}
+        	rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
         	e.printStackTrace();
         }
@@ -81,6 +90,7 @@ public class ConfirmDao {
     		}
     		rs.close();
     		pst.close();
+    		conn.close();
     	} catch (SQLException e) {
     		e.printStackTrace();
     	}
@@ -89,22 +99,6 @@ public class ConfirmDao {
     	else
     		return false;
 	}
-	
-	public boolean inConfirm(String stuID) throws SQLException {
-        String sql = "select * from confirm_list where stuID = '" + stuID + "'";
-        Connection conn = DbUtil.getCon();
-        Confirm cf = new Confirm();
-        try {
-        	PreparedStatement pst = conn.prepareStatement(sql);
-        	ResultSet rs = pst.executeQuery();
-        	while(rs.next()) {
-        		return true;
-        	}
-        } catch (SQLException e) {
-        	e.printStackTrace();
-        }
-        return false;
-    }
 
     public boolean modifyConfirmInfo(String stuID, String name, String IDnumber) throws SQLException {
     	String sql = "update confirm_list set name = ? where stuID = " + stuID + "";
@@ -114,9 +108,11 @@ public class ConfirmDao {
     		pst.setString(1, name);
     		int flag = pst.executeUpdate();
     		pst.close();
+    		conn.close();
     		return flag > 0 ? true : false;
     	} catch (SQLException e) {
     		e.printStackTrace();
+    		conn.close();
     		return false;
     	}
 	}
@@ -129,9 +125,11 @@ public class ConfirmDao {
     		PreparedStatement pst = conn.prepareStatement(sql);
     		int flag = pst.executeUpdate();
     		pst.close();
+    		conn.close();
     		return flag > 0 ? true : false;
     	} catch (SQLException e) {
     		e.printStackTrace();
+    		conn.close();
     		return false;
     	}
     }
@@ -147,9 +145,11 @@ public class ConfirmDao {
     		pst.setString(3, con.getIDnumber());
     		int flag = pst.executeUpdate();
     		pst.close();
+    		conn.close();
     		return flag > 0 ? true : false;
     	} catch (SQLException e) {
     		e.printStackTrace();
+    		conn.close();
     		return false;
     	}
     }
@@ -166,9 +166,11 @@ public class ConfirmDao {
     		pst.setString(3, stu.getStuPersonID());
     		int flag = pst.executeUpdate();
     		pst.close();
+    		conn.close();
     		return flag > 0 ? true : false;
     	} catch (SQLException e) {
     		e.printStackTrace();
+    		conn.close();
     		return false;
     	}
     }

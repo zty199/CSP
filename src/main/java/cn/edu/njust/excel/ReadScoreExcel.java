@@ -18,18 +18,26 @@ import cn.edu.njust.dao.*;
 
 public class ReadScoreExcel {
 
+	private List<Score> list = new ArrayList<Score>();
+	
+	public List<Score> getList() {
+		return list;
+	}
+
+	public void setList(List<Score> list) {
+		this.list = list;
+	}
 	/*
-	 * inout: .xls文件路径 and session
+	 * inout: .xls文件路径
 	 * output: List<Student>
 	 * 
 	 */
-	public List<Score> readXls(String path, String session) throws IOException {
+	public void readXls(String path, String session) throws IOException {
         InputStream is = new FileInputStream(path);
         @SuppressWarnings("resource")
 		HSSFWorkbook hssfWorkbook = new HSSFWorkbook(is);
-        Score score = new Score();
-        StudentDao dao1 = new StudentDao();
-        List<Score> list = new ArrayList<Score>();
+        System.out.println("Reading...");
+        StudentDao dao = new StudentDao();
         // 循环工作表Sheet
         for (int numSheet = 0; numSheet < hssfWorkbook.getNumberOfSheets(); numSheet++) {
             HSSFSheet hssfSheet = hssfWorkbook.getSheetAt(numSheet);
@@ -37,10 +45,10 @@ public class ReadScoreExcel {
                 continue;
             }
             // 循环行Row
-            for (int rowNum = 2; rowNum <= hssfSheet.getLastRowNum(); rowNum++) {
+            for (int rowNum = 1; rowNum < hssfSheet.getLastRowNum(); rowNum++) {
                 HSSFRow hssfRow = hssfSheet.getRow(rowNum);
-                if (hssfRow != null) {
-                    score = new Score();
+                if (hssfRow != null && getValue(hssfRow.getCell(0)) != "") {
+                	Score score = new Score();
                     HSSFCell IDnum = hssfRow.getCell(3);
                     HSSFCell all_sc = hssfRow.getCell(11);
                     HSSFCell first = hssfRow.getCell(12);
@@ -52,16 +60,16 @@ public class ReadScoreExcel {
                     HSSFCell rank_all = hssfRow.getCell(18);
                     String ID = getValue(IDnum);
                     try {
-						String stuID = dao1.getStuID(ID);
+						String stuID = dao.getStuID(ID);
 						if(!stuID.equals("NO")) {
 							score.setSession(session);
 							score.setStuID(stuID);
-							score.setTotal_score(Integer.parseInt(getValue(all_sc)));
-							score.setScore_1(Integer.parseInt(getValue(first)));
-							score.setScore_2(Integer.parseInt(getValue(second)));
-							score.setScore_3(Integer.parseInt(getValue(third)));
-							score.setScore_4(Integer.parseInt(getValue(fourth)));
-							score.setScore_5(Integer.parseInt(getValue(fifth)));
+							score.setTotal_score(Integer.parseInt(getValue(all_sc).substring(0, getValue(all_sc).length()-2)));
+							score.setScore_1(Integer.parseInt(getValue(first).substring(0, getValue(first).length()-2)));
+							score.setScore_2(Integer.parseInt(getValue(second).substring(0, getValue(second).length()-2)));
+							score.setScore_3(Integer.parseInt(getValue(third).substring(0, getValue(third).length()-2)));
+							score.setScore_4(Integer.parseInt(getValue(fourth).substring(0, getValue(fourth).length()-2)));
+							score.setScore_5(Integer.parseInt(getValue(fifth).substring(0, getValue(fifth).length()-2)));
 							score.setCur_rank(getValue(rank_1));
 							score.setAll_rank(getValue(rank_all));
 							list.add(score);
@@ -73,19 +81,15 @@ public class ReadScoreExcel {
                 }
             }
         }
-		return list;
     }
     
     private String getValue(HSSFCell hssfCell) {
-    	if (hssfCell.getCellType() == CellType.BOOLEAN) {
-        	// 返回布尔类型的值
-        	return String.valueOf(hssfCell.getBooleanCellValue());
-        } else if (hssfCell.getCellType() == CellType.NUMERIC) {
+    	if (hssfCell.getCellType() == CellType.NUMERIC) {
         	// 返回数值类型的值
         	return String.valueOf(hssfCell.getNumericCellValue());
         } else {
         	// 返回字符串类型的值
-        	return String.valueOf(hssfCell.getStringCellValue());
+        	return hssfCell.getStringCellValue();
         }
      }
 

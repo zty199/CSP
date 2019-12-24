@@ -11,18 +11,17 @@ public class SaveStudent {
 	
     public void save(String path, String grade) throws IOException, SQLException {
         ReadStudentExcel xlsMain = new ReadStudentExcel();
-        StudentDao d = new StudentDao();
-        System.out.println(grade);
         xlsMain.readXls(path, grade);
-        List<Student> list = xlsMain.getList1();
-        System.out.println("saveing...");
+        StudentDao dao = new StudentDao();
+        List<Student> list = xlsMain.getList();
+        System.out.println("Saving...");
+        System.out.println("StudentGrade: " + grade);
         for (int i = 0; i < list.size(); i++) {
         	Student stu = list.get(i);
-            System.out.println(stu.getStuID());
-            if (!d.isValid(stu.getStuID(), stu.getStuPassword())) {
-            	d.addStudent(stu);
+            if (!dao.isListed(stu.getStuID())) {
+            	dao.addStudent(stu);
             } else {
-                System.out.println("The Record was Existed, and has been thrown away!");
+                System.out.println("The record exists, and has been thrown away!");
             }
         }
     }

@@ -33,6 +33,9 @@ public class ScoreDao {
              	score.setAll_rank(rs.getString("period_rank"));
                 list.add(score);
              }
+             rs.close();
+             pst.close();
+             conn.close();
          } catch (SQLException e) {
              e.printStackTrace();
          }
@@ -61,6 +64,9 @@ public class ScoreDao {
              	score.setAll_rank(rs.getString("period_rank"));
                 list.add(score);
              }
+             rs.close();
+             pst.close();
+             conn.close();
          } catch (SQLException e) {
              e.printStackTrace();
          }
@@ -84,6 +90,9 @@ public class ScoreDao {
         		score.setScore_4(rs.getInt("score_4"));
         		score.setScore_5(rs.getInt("score_5"));
         	}
+        	rs.close();
+            pst.close();
+            conn.close();
         } catch (SQLException e) {
         	e.printStackTrace();
         }
@@ -112,6 +121,9 @@ public class ScoreDao {
 	            score.setAll_rank(rs.getString("period_rank"));
 	            list.add(score);
 	        }
+			rs.close();
+            pst.close();
+            conn.close();
 	    } catch (SQLException e) {
 	        e.printStackTrace();
 	    }
@@ -136,9 +148,11 @@ public class ScoreDao {
 	    	pst.setString(10, sc.getAll_rank());
 	    	int flag = pst.executeUpdate();
 	    	pst.close();
+	    	conn.close();
 	    	return flag > 0 ? true : false;
 	    } catch (SQLException e) {
 	    	e.printStackTrace();
+	    	conn.close();
 	    	return false;
 	    }
 	}
@@ -151,9 +165,11 @@ public class ScoreDao {
     		pst.setInt(1, score);
     		int flag = pst.executeUpdate();
     		pst.close();
+    		conn.close();
     		return flag > 0 ? true : false;
     	} catch (SQLException e) {
     		e.printStackTrace();
+    		conn.close();
     		return false;
     	}
 	}
@@ -166,9 +182,11 @@ public class ScoreDao {
     		PreparedStatement pst = conn.prepareStatement(sql);
     		int flag = pst.executeUpdate();
     		pst.close();
+    		conn.close();
     		return flag > 0 ? true : false;
     	} catch (SQLException e) {
     		e.printStackTrace();
+    		conn.close();
     		return false;
     	}
     }

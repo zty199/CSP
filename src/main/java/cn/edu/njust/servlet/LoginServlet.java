@@ -24,7 +24,6 @@ public class LoginServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html;charset=utf-8");
         request.setCharacterEncoding("utf-8");
-        //String preUrl = (String) request.getSession().getAttribute("preUrl");
         int identity = Integer.parseInt(request.getParameter("identity"));
         if(identity == 0) {
         	Student student = new Student();
@@ -36,16 +35,12 @@ public class LoginServlet extends HttpServlet {
     				student = dao.getInfo(student.getStuID());
     				request.getSession().setAttribute("user", student);
     				request.getSession().setAttribute("identity", identity);
-    				//if(preUrl != null && !preUrl.endsWith("login.jsp") && !preUrl.endsWith("index.jsp")) {
-    				//	response.sendRedirect(preUrl);
-    				//} else {
-    					response.sendRedirect("../jsp/studentMain.jsp");
-    				//}
+    				response.sendRedirect("../jsp/studentMain.jsp");
     			    return;
     			} else {
     				request.getSession().setAttribute("user", null);
     			    JOptionPane.showMessageDialog(null, "账号或密码错误！");
-    			    response.sendRedirect("../jsp/login.jsp");
+    			    response.sendRedirect("../jsp/login.jsp?userid=" + student.getStuID());
     			}
     		} catch (SQLException e) {
     			// TODO Auto-generated catch block
@@ -61,16 +56,12 @@ public class LoginServlet extends HttpServlet {
     				admin = dao.getInfo(admin.getAdminID());
     				request.getSession().setAttribute("user", admin);
     				request.getSession().setAttribute("identity", identity);
-    				//if(preUrl != null || !preUrl.endsWith("login.jsp") && !preUrl.endsWith("index.jsp")) {
-    				//	response.sendRedirect(preUrl);
-    				//} else {
-    					response.sendRedirect("../jsp/managerMain.jsp");
-    				//}
+    				response.sendRedirect("../jsp/managerMain.jsp");
     			    return;
     			} else {
     				request.getSession().setAttribute("user", null);
     			    JOptionPane.showMessageDialog(null, "账号或密码错误！");
-    			    response.sendRedirect("../jsp/login.jsp");
+    			    response.sendRedirect("../jsp/login.jsp?userid=" + admin.getAdminID());
     			}
     		} catch (SQLException e) {
     			// TODO Auto-generated catch block

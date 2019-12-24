@@ -73,6 +73,7 @@ public class CalculateServlet extends HttpServlet {
 			}
         }
         if(i != list.size()) {
+        	JOptionPane.showMessageDialog(null, "未知原因，数据更新失败！");
     		response.sendRedirect("../jsp/managerOpen.jsp");
     		return;
     	} else {
