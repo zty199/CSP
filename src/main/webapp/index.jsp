@@ -3,7 +3,4 @@
 String path = request.getContextPath();
 String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort()+path+"/";
 %>
-
-<%
-response.sendRedirect("/CSP/jsp/index.jsp");
-%>
+<jsp:forward page="jsp/login.jsp"></jsp:forward>

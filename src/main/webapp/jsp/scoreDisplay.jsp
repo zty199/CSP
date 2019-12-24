@@ -39,48 +39,7 @@ admin = (Admin) session.getAttribute("user");
     <script src="js/jquery.min.js"></script>
     <script src="js/foundation.min.js"></script>
     <script src="js/modernizr.js"></script>
-    <script>
-		$(function () {
-			$("#checkall").click(function () { //判断全选框的改变
-				var flage = $(this).is(":checked"); //全选选中为true，否则为false
-				$("input[name=grade]").each(function () {
-					$(this).prop("checked", flage);
-				})
-			});
-			//当子元素都选全选选中，其中一个不选取消全选
-			$("input[name=grade]").click(function () {
-				var flage1 = true;
-				for (var i = 0; i < $("input[name=grade]").length; i++) {
-					if (!$($("input[name=grade]")[i]).is(":checked")) {
-						flage1 = false;
-						break;
-					}
-				}
-				$("#checkall").prop("checked", flage1);
-			})
-		})
-
-		$(function () {
-			$("#stuID").click(function () { //判断全选框的改变
-				var flage = $(this).is(":checked"); //全选选中为true，否则为false
-				$("input[name=stuid]").each(function () {
-					$(this).prop("checked", flage);
-				})
-			});
-			//当子元素都选全选选中，其中一个不选取消全选
-			$("input[name=stuid]").click(function () {
-				var flage1 = true;
-				for (var i = 0; i < $("input[name=stuid]").length; i++) {
-					if (!$($("input[name=stuid]")[i]).is(":checked")) {
-						flage1 = false;
-						break;
-					}
-				}
-				$("#stuID").prop("checked", flage1);
-			})
-		})
-	</script>
-
+    
 </head>
 
 <body class="hold-transition layout-top-nav">
@@ -203,11 +162,11 @@ admin = (Admin) session.getAttribute("user");
 																<%
 																if(admin.getAdminGrade().equals("0000")) {
 																%>
-																	<input type="text" name="grade" value="<%=admin.getAdminGrade()%>级学生成绩表" style="text-align:center" onfocus="this.blur()">
+																	<input type="text" name="grade" value="全体学生成绩表" style="text-align:center" onfocus="this.blur()">
 																<%
 																} else {
 																%>
-																	<input type="text" name="grade" value="全体学生成绩表" style="text-align:center" onfocus="this.blur()">
+																	<input type="text" name="grade" value="<%=admin.getAdminGrade()%>级学生成绩表" style="text-align:center" onfocus="this.blur()">
 																<%
 																}
 																%>

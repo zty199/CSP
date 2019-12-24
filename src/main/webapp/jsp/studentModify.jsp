@@ -164,6 +164,9 @@ if(identity == 1) {
             		  <div class="col-4 m-auto">
             			<button type="submit" class="btn btn-purple btn-block">修改</button>
             		  </div>
+            		  <div class="col-4 m-auto">
+				  	    <a href="/CSP/jsp/studentModify.jsp?stuID=<%=student.getStuID()%>" class="btn btn-block btn-danger">重置</a>
+					  </div>
             		<!-- /.col -->
             		</div>
                   </form>
@@ -172,9 +175,6 @@ if(identity == 1) {
 				  </div>
 				  <div class="row">
 					<div class="social-auth-links col-4 m-auto">
-				  	  <a href="/CSP/jsp/studentModify.jsp" class="btn btn-block btn-danger">重置</a>
-					</div>
-					<div class="social-auth-links col-4 m-auto">
 					  <script type="text/javascript">
 						function exit() {
 						window.opener=null;
@@ -182,17 +182,7 @@ if(identity == 1) {
 						window.close();
 						};
 					  </script>
-					  <%
-          			  if(identity == 0) {
-          			  %>
 				  	  <a onclick="exit()" class="btn btn-block btn-default">关闭页面</a>
-				  	  <%
-				  	  } else {
-				  	  %>
-				  	  <a onclick="exit()" class="btn btn-block btn-default">关闭页面</a>
-				  	  <%
-				  	  }
-				  	  %>
 					</div>
 			  	  </div>
 				</div>

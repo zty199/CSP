@@ -4,15 +4,10 @@ import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.PrintWriter;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
  
 import javax.servlet.ServletException;
 import javax.servlet.ServletOutputStream;
@@ -42,6 +37,7 @@ public class ConfirmServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		response.setCharacterEncoding("UTF-8");
 		System.out.println("come to the servlet");
+		@SuppressWarnings("resource")
 		HSSFWorkbook wb = new HSSFWorkbook();
 		// 在workbook中添加一个sheet，对应Excel中的一个sheet
 		HSSFSheet sheet = wb.createSheet("XXX表");
@@ -115,8 +111,6 @@ public class ConfirmServlet extends HttpServlet {
 		     if (bos != null) {
 		    	 bos.close();
 		     }
-		     //response.sendRedirect("../jsp/managerConfirm.jsp");    
-		     request.getRequestDispatcher("../jsp/managerConfirm.jsp").forward(request,response);
 		}   
 	}
 
