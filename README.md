@@ -32,8 +32,8 @@
   1)	导入csp.sql文件到服务器端数据库
       使用mysql命令行，输入密码root连接数据库；
       create database csp;
-      use datebase csp;
+      use database csp;
       source ../csp.sql;（csp.sql文件的完整路径）
   2)	将项目打包文件CSP.war部署至Apache Tomcat安装目录的webapps文件夹下；
   3)	运行Apache Tomcat 9.0服务
-  4)	在浏览器中键入http://localhost:8080/CSP/进入登陆页面开始运行项目
+  4)	在浏览器中键入 http://localhost:8080/CSP/ 进入登陆页面开始运行项目
